@@ -5,7 +5,7 @@ The files have been arranged such that when we choose to upstream a new package 
 
 1) How to rebuild a thirdparty package?
 Have a build-VM ready. Additionally install git,spectool(to get the source targz given a spec file) and mock-1.1.41 ( to build the rpms given the source and spec file)in the VM. Checkout this repo.
-Go to $(SB_TOP)/upstream/rpm. Issue make <target-name>. It should place the rpms(source and binary) in BUILD directory outisde the SB.
+Go to $(SB_TOP)/upstream/rpm. Issue make <target-name>. It should place the rpms(source and binary) in BUILD directory outisde the SandBox.
 
 2) How to debug if the build fails?
 The BUILD directory that gets created outside the sandbox should have a build.log file which contains the error messages.
