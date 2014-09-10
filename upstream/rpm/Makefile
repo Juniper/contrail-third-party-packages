@@ -25,7 +25,7 @@ python-pycassa: $(PREP)
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-pycassa/ --spec specs/python-pycassa/python-pycassa.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-pycassa*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/ifmap-server/pycassa-1.10.0.tar.gz
+	rm -f specs/python-pycassa/pycassa-1.10.0.tar.gz
 
 python-kombu: $(PREP)
 	@echo "About to make python-kombu"
@@ -43,7 +43,7 @@ python-zope-interface: $(PREP)
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-zope-interface/ --spec specs/python-zope-interface/python-zope-interface.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-zope*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/python-kombu/zope.interface*.tar.gz
+	rm -f specs/python-zope-interface/zope.interface*.tar.gz
 
 python-simplejson: $(PREP)
 	@echo "About to make python-simplejson"
@@ -79,9 +79,57 @@ python-geventhttpclient: $(PREP)
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-geventhttpclient/ --spec specs/python-geventhttpclient/python-geventhttpclient.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-geventhttpclient*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/python-bottle/geventhttpclient*.tar.gz
+	rm -f specs/python-geventhttpclient/geventhttpclient*.tar.gz
+
+python-boto: $(PREP)
+	@echo "About to make python-boto"
+	#Fetch the source
+	spectool -g -R specs/python-boto/python-boto.spec -C specs/python-boto/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-boto/ --spec specs/python-boto/python-boto.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-boto*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-boto/boto*.tar.gz
+
+python-bitarray: $(PREP)
+	@echo "About to make python-bitarray"
+	#Fetch the source
+	spectool -g -R specs/python-bitarray/python-bitarray.spec -C specs/python-bitarray/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-bitarray/ --spec specs/python-bitarray/python-bitarray.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-bitarray*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-bitarray/bitarray*.tar.gz
+
+python-thrift: $(PREP)
+	@echo "About to make python-thrift"
+	#Fetch the source
+	spectool -g -R specs/python-thrift/python-thrift.spec -C specs/python-thrift/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-thrift/ --spec specs/python-thrift/python-thrift.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-thrift*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-thrift/thrift*.tar.gz
+
+redis-py: $(PREP)
+	@echo "About to make redis-py"
+	#Fetch the source
+	spectool -g -R specs/redis-py/redis-py.spec -C specs/redis-py/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/redis-py/ --spec specs/redis-py/redis-py.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/redis-py*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/redis-py/redis*.tar.gz
+
+xmltodict: $(PREP)
+	@echo "About to make xmltodict"
+	#Fetch the source
+	spectool -g -R specs/xmltodict/xmltodict.spec -C specs/xmltodict/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/xmltodict/ --spec specs/xmltodict/xmltodict.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/xmltodict*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/xmltodict/xmltodict*.tar.gz
+
 
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-lxml python-bottle \
-	python-geventhttpclient
+	python-geventhttpclient python-boto \
+	python-bitarray python-thrift redis-py \
+	xmltodict
