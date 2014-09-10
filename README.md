@@ -23,3 +23,8 @@ Raise a pull request.
 
 6) Build fails because build dependency packages cannot be fetched
 Identify the repo that hosts the build dependecy package. Add this repo to the config file, upstream/rpm/utils/ and issue rebuild.
+
+7) How to create a spec file for a python library
+Inside the python package issue
+python setup.py bdist_rpm --spec-only
+to get the spec file
