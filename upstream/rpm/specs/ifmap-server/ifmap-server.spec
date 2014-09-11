@@ -31,15 +31,13 @@ Requires: hc-httpcore
 ifmap-server  
 
 %prep
-rm -rf $RPM_BUILD_DIR/irond-0.3.2-src
-rm -rf $RPM_BUILD_DIR/ifmap-server-0.3.2
 #copy the irond.tar.gz file to ifmap-server.tar.gz file
 (cd $RPM_BUILD_DIR; unzip $RPM_SOURCE_DIR/irond-0.3.2-src.zip)
 mkdir -p $RPM_BUILD_DIR/ifmap-server-0.3.2
 ls $RPM_BUILD_DIR/irond-0.3.2-src | xargs -n 1 -I'{}' mv $RPM_BUILD_DIR/irond-0.3.2-src/'{}' $RPM_BUILD_DIR/ifmap-server-0.3.2/
+#(cd $RPM_SOURCE_DIR;tar -zcvf ifmap-server-0.3.2.tar.gz $RPM_SOURCE_DIR/ifmap-server-0.3.2)
 
-
-%setup -n ifmap-server-0.3.2
+%setup -D -n ifmap-server-0.3.2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
