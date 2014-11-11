@@ -29,13 +29,13 @@ kazoo:$(PREP)
 
 libipfix:$(PREP)
 	#copy the libipfix  to build dir and prepare a .orig file
-	sudo cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/
+	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/
 	#Run configure once to setup the prefix path and
 	# then prepare the orig.tar.gz
-	(cd $(GIT_ROOT)/../build/libipfix_110209/; sudo ./configure --prefix=/home/ubuntu/build/libipfix_110209/debian/tmp/usr)
-	(cd $(GIT_ROOT)/../build ; sudo rm -rf libipfix_110209/debian/)
+	(cd $(GIT_ROOT)/../build/libipfix_110209/; ./configure --prefix=/home/ubuntu/build/libipfix_110209/debian/tmp/usr)
+	(cd $(GIT_ROOT)/../build ; rm -rf libipfix_110209/debian/)
 	(cd $(GIT_ROOT)/../build; tar -zcvf libipfix_110209.orig.tar.gz libipfix_110209)
-	sudo cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/
+	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/
 
 	#Build the liibpfix from the BUILD dir
 	(cd $(GIT_ROOT)/../build/libipfix_110209; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
