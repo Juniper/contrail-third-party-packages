@@ -1,0 +1,5 @@
+libipfix (110209-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Arvind Viswanathan <ubuntu@unknown>  Mon, 10 Nov 2014 12:55:05 -0800
