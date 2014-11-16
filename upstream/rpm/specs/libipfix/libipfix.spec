@@ -9,7 +9,7 @@ Summary: 		libipfix package
 License: 		GPL
 Name: 			%{name}
 Version: 		%{version}
-Release: 		%{release}
+Release: 		%{release}%{?dist}
 Source: 		%{name}_%{version}.tgz
 #Prefix: 		/usr
 Group: 			Development/Tools
