@@ -23,6 +23,8 @@ override_dh_auto_clean:
 	make distclean
 
 override_dh_install:
-	@echo "/usr/*" > debian/libipfix.install
+	@echo "/usr/lib/*" >> debian/libipfix.install
+	@echo "/usr/bin/*" >> debian/libipfix.install
+	@echo "/usr/include/*" >> debian/libipfix.install
 	dh_install
 

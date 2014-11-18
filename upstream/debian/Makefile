@@ -1,6 +1,7 @@
 PREP = prep
 GIT_ROOT = $(shell git rev-parse --show-toplevel)
-
+DISTRO_VAL = $(shell lsb_release -r | egrep -o '[0-9]{2}.[0-9]{2}')
+DISTRO =  $(strip $(DISTRO_VAL))
 $(PREP): 
 	#First time run requires update to install pkgs
 	sudo apt-get update
@@ -29,16 +30,18 @@ kazoo:$(PREP)
 
 libipfix:$(PREP)
 	#copy the libipfix  to build dir and prepare a .orig file
-	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/
+	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/libipfix_110209-1
 	#Run configure once to setup the prefix path and
 	# then prepare the orig.tar.gz
-	(cd $(GIT_ROOT)/../build/libipfix_110209/; ./configure --prefix=/home/ubuntu/build/libipfix_110209/debian/tmp/usr)
-	(cd $(GIT_ROOT)/../build ; rm -rf libipfix_110209/debian/)
-	(cd $(GIT_ROOT)/../build; tar -zcvf libipfix_110209.orig.tar.gz libipfix_110209)
-	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/
-
+	(cd $(GIT_ROOT)/../build/libipfix_110209-1/; ./configure --prefix=/home/ubuntu/build/libipfix_110209-1/debian/tmp/usr)
+	(cd $(GIT_ROOT)/../build ; rm -rf libipfix_110209-1/debian/)
+	(cd $(GIT_ROOT)/../build; tar -zcvf libipfix_110209-1.orig.tar.gz libipfix_110209-1)
+	(cd $(GIT_ROOT)/../build; rm -rf libipfix_110209-1)
+	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/libipfix_110209-1
+	#Change the changelog to include distro information
+	(cd $(GIT_ROOT)/../build/libipfix_110209-1/; sed -i 's/(110209-1)/(110209-1-0ubuntu0.$(DISTRO))/g' debian/changelog)
 	#Build the liibpfix from the BUILD dir
-	(cd $(GIT_ROOT)/../build/libipfix_110209; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+	(cd $(GIT_ROOT)/../build/libipfix_110209-1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 all:$(PREP) \
 	kazoo libipfix
