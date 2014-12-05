@@ -57,5 +57,12 @@ expat:$(PREP)
 	#Build the expat from the BUILD dir
 	(cd $(GIT_ROOT)/../build/expat; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+lxml:$(PREP)
+	#Copy the lxml debian directory to build dir and prepare a .orig file
+	cp -R lxml/ $(GIT_ROOT)/../build/
+	(cd $(GIT_ROOT)/../build/lxml;bash $(GIT_ROOT)/upstream/debian/utils/get-sources.sh)
+	#Build the lxml from the BUILD dir
+	(cd $(GIT_ROOT)/../build/lxml; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 all:$(PREP) \
-	kazoo libipfix docker-py expat
+	kazoo libipfix docker-py expat lxml
