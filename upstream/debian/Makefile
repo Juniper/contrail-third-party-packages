@@ -43,5 +43,13 @@ libipfix:$(PREP)
 	#Build the liibpfix from the BUILD dir
 	(cd $(GIT_ROOT)/../build/libipfix_110209-1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+kafka:$(PREP)
+	#copy the libipfix  to build dir
+	cp -Rf kafka* $(GIT_ROOT)/../build/kafka_2.9.2-0.8.1.1
+	#Prepare the .orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -zcvf kafka_2.9.2-0.8.1.1.orig.tar.gz kafka_2.9.2-0.8.1.1)
+	#Build the liibpfix from the BUILD dir
+	(cd $(GIT_ROOT)/../build/kafka_2.9.2-0.8.1.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 all:$(PREP) \
-	kazoo libipfix
+	kazoo libipfix kafka
