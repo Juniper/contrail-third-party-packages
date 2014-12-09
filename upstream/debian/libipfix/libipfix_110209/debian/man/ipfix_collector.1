@@ -1,0 +1,41 @@
+.TH IPFIX_COLLECTOR "1" "December 2014" "ipfix_collector" "User Commands"
+.SH NAME
+ipfix_collector \- Collector for IPFIX files/databases
+.SH DESCRIPTION
+Collect IPFiles in a database or a file
+.PP
+usage: ipfix_collector [options]
+.SS "options:"
+.TP
+\fB\-h\fR
+this help
+.TP
+\fB\-4\fR
+accept connections via AF_INET socket
+.TP
+\fB\-6\fR
+accept connections via AF_INET6 socket
+.TP
+\fB\-o\fR <datadir>
+store files of collected data in this dir
+.TP
+\fB\-p\fR <portno>
+listen on this port (default=4739)
+.TP
+\fB\-s\fR
+support SCTP clients
+.TP
+\fB\-t\fR
+support TCP clients
+.TP
+\fB\-u\fR
+support UDP clients
+.TP
+\fB\-v\fR
+increase verbose level
+.PP
+example: ipfix_collector \fB\-stu\fR \fB\-vv\fR \fB\-o\fR .
+.SH "SEE ALSO"
+The full documentation for
+.B ipfix_collector
+is maintained as a Texinfo manual.
