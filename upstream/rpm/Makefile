@@ -117,6 +117,15 @@ redis-py: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/redis-py*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/redis-py/redis*.tar.gz
 
+docker-py: $(PREP)
+	@echo "About to make docker-py"
+	#Fetch the source
+	spectool -g -R specs/docker-py/docker-py.spec -C specs/docker-py/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/docker-py/ --spec specs/docker-py/docker-py.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/docker-py*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/docker-py/docker*.tar.gz
+
 xmltodict: $(PREP)
 	@echo "About to make xmltodict"
 	#Fetch the source
@@ -149,4 +158,4 @@ all:$(PREP) \
 	python-simplejson python-lxml python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
-	xmltodict libvirt
+	xmltodict libvirt docker-py

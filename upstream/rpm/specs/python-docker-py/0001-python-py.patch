@@ -1,0 +1,72 @@
+From bbfed0e0fcaa4bab5e195cb15bdc33dcbace2a39 Mon Sep 17 00:00:00 2001
+From: Bartlomiej Biernacki <pax0r@o2.pl>
+Date: Tue, 9 Dec 2014 13:24:47 -0800
+Subject: [PATCH] Removed websocket support for deb/rpm packaging
+
+---
+ docker/client.py | 20 --------------------
+ setup.py         |  3 ---
+ 2 files changed, 23 deletions(-)
+
+diff --git a/docker/client.py b/docker/client.py
+index 936ab52..abd413d 100644
+--- a/docker/client.py
++++ b/docker/client.py
+@@ -31,9 +31,6 @@ from .utils import utils
+ from . import errors
+ from .tls import TLSConfig
+ 
+-if not six.PY3:
+-    import websocket
+-
+ DEFAULT_DOCKER_API_VERSION = '1.15'
+ DEFAULT_TIMEOUT_SECONDS = 60
+ STREAM_HEADER_SIZE_BYTES = 8
+@@ -249,20 +246,6 @@ class Client(requests.Session):
+             'stream': 1
+         }
+ 
+-    def _attach_websocket(self, container, params=None):
+-        if six.PY3:
+-            raise NotImplementedError("This method is not currently supported "
+-                                      "under python 3")
+-        url = self._url("/containers/{0}/attach/ws".format(container))
+-        req = requests.Request("POST", url, params=self._attach_params(params))
+-        full_url = req.prepare().url
+-        full_url = full_url.replace("http://", "ws://", 1)
+-        full_url = full_url.replace("https://", "wss://", 1)
+-        return self._create_websocket_connection(full_url)
+-
+-    def _create_websocket_connection(self, url):
+-        return websocket.create_connection(url)
+-
+     def _get_raw_response_socket(self, response):
+         self._raise_for_status(response)
+         if six.PY3:
+@@ -396,9 +379,6 @@ class Client(requests.Session):
+                 'stream': 1
+             }
+ 
+-        if ws:
+-            return self._attach_websocket(container, params)
+-
+         if isinstance(container, dict):
+             container = container.get('Id')
+ 
+diff --git a/setup.py b/setup.py
+index b63cc92..0a7ba3e 100644
+--- a/setup.py
++++ b/setup.py
+@@ -11,9 +11,6 @@ requirements = [
+     'six >= 1.3.0',
+ ]
+ 
+-if sys.version_info[0] < 3:
+-    requirements.append('websocket-client >= 0.11.0')
+-
+ exec(open('docker/version.py').read())
+ 
+ with open('./test-requirements.txt') as test_reqs_txt:
+-- 
+1.9.1
+
