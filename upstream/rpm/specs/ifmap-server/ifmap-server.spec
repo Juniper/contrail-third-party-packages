@@ -26,6 +26,7 @@ Requires: slf4j
 Requires: apache-commons-codec
 Requires: log4j
 Requires: hc-httpcore
+Obsoletes: irond
 
 %description
 ifmap-server  
