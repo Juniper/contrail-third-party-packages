@@ -1,8 +1,8 @@
 %define name docker-py
-%define version 0.6.1
-%define unmangled_version 0.6.1-dev
-%define unmangled_version 0.6.1-dev
-%define release 1contrail
+%define version 0.6.0
+%define unmangled_version 0.6.0
+%define unmangled_version 0.6.0
+%define release 1contrail1
 
 Summary: Python client for Docker.
 Name: %{name}
@@ -14,7 +14,10 @@ Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: noarch
-Patch0: 0001-python-py.patch
+Patch0: 0001-docker-py.patch
+
+BuildRequires:python-devel
+BuildRequires:python-setuptools
 
 %description
 An API client for docker written in Python

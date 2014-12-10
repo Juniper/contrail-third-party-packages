@@ -28,6 +28,16 @@ kazoo:$(PREP)
 	#Build the kazoo from the BUILD dir	
 	(cd $(GIT_ROOT)/../build/kazoo-1.3.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+docker-py:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/d/docker-py/docker-py-0.6.0.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/docker-py-0.6.0.tar.gz)
+	(cd $(GIT_ROOT)/../build; cp docker-py-0.6.0.tar.gz docker-py_0.6.0.orig.tar.gz)
+	cp -Rf docker-py/debian $(GIT_ROOT)/../build/docker-py-0.6.0
+	
+	#Build the docker-py from the BUILD dir	
+	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+
 libipfix:$(PREP)
 	#copy the libipfix  to build dir and prepare a .orig file
 	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/libipfix_110209-1
@@ -44,4 +54,4 @@ libipfix:$(PREP)
 	(cd $(GIT_ROOT)/../build/libipfix_110209-1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 all:$(PREP) \
-	kazoo libipfix
+	kazoo libipfix docker-py
