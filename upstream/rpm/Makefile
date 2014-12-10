@@ -120,11 +120,11 @@ redis-py: $(PREP)
 docker-py: $(PREP)
 	@echo "About to make docker-py"
 	#Fetch the source
-	spectool -g -R specs/docker-py/docker-py.spec -C specs/docker-py/
+	spectool -g -R specs/python-docker-py/docker-py.spec -C specs/python-docker-py/
 	#mock instructions
-	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/docker-py/ --spec specs/docker-py/docker-py.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-docker-py/ --spec specs/python-docker-py/docker-py.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/docker-py*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/docker-py/docker*.tar.gz
+	rm -f specs/python-docker-py/docker*.tar.gz
 
 xmltodict: $(PREP)
 	@echo "About to make xmltodict"
