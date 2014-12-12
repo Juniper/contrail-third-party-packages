@@ -2,7 +2,7 @@ PREP = prep
 GIT_ROOT = $(shell git rev-parse --show-toplevel)
 DISTRO_VAL = $(shell lsb_release -r | egrep -o '[0-9]{2}.[0-9]{2}')
 DISTRO =  $(strip $(DISTRO_VAL))
-$(PREP): 
+$(PREP):
 	#First time run requires update to install pkgs
 	sudo apt-get update
 	#Install pbuilder and copy the conf file
@@ -19,13 +19,12 @@ $(PREP):
 	mkdir -p $(GIT_ROOT)/../build
 
 kazoo:$(PREP)
-	#Copy the kazoo to build dir and prepare a .orig file
+	#Copy the kazoo debian directory to build dir and prepare a .orig file
 	cp -R kazoo/kazoo-1.3.1 $(GIT_ROOT)/../build/
 	(cd $(GIT_ROOT)/../build ; rm -rf kazoo-1.3.1/debian/)
 	(cd $(GIT_ROOT)/../build; tar -zcvf kazoo_1.3.1.orig.tar.gz kazoo-1.3.1)
 	cp -Rf kazoo/kazoo-1.3.1 $(GIT_ROOT)/../build/
-	
-	#Build the kazoo from the BUILD dir	
+	#Build the kazoo from the BUILD dir
 	(cd $(GIT_ROOT)/../build/kazoo-1.3.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 docker-py:$(PREP)
@@ -33,13 +32,11 @@ docker-py:$(PREP)
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/docker-py-0.6.0.tar.gz)
 	(cd $(GIT_ROOT)/../build; cp docker-py-0.6.0.tar.gz docker-py_0.6.0.orig.tar.gz)
 	cp -Rf docker-py/debian $(GIT_ROOT)/../build/docker-py-0.6.0
-	
 	#Build the docker-py from the BUILD dir	
 	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
-
 libipfix:$(PREP)
-	#copy the libipfix  to build dir and prepare a .orig file
+	#copy the libipfix debian directory to build dir and prepare a .orig file
 	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/libipfix_110209-1
 	#Run configure once to setup the prefix path and
 	# then prepare the orig.tar.gz
@@ -53,5 +50,12 @@ libipfix:$(PREP)
 	#Build the liibpfix from the BUILD dir
 	(cd $(GIT_ROOT)/../build/libipfix_110209-1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+expat:$(PREP)
+	#Copy the expat debian directory to build dir and prepare a .orig file
+	cp -R expat/ $(GIT_ROOT)/../build/
+	(cd $(GIT_ROOT)/../build/expat;bash $(GIT_ROOT)/upstream/debian/utils/get-sources.sh)
+	#Build the expat from the BUILD dir
+	(cd $(GIT_ROOT)/../build/expat; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 all:$(PREP) \
-	kazoo libipfix docker-py
+	kazoo libipfix docker-py expat
