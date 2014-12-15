@@ -57,5 +57,17 @@ expat:$(PREP)
 	#Build the expat from the BUILD dir
 	(cd $(GIT_ROOT)/../build/expat; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+kafka:$(PREP)
+	#Get the kafka binary pkg
+	(cd $(GIT_ROOT)/../build/; wget http://mirror.olnevhost.net/pub/apache/kafka/0.8.1.1/kafka_2.9.2-0.8.1.1.tgz)
+	#untar the gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/kafka_2.9.2-0.8.1.1.tgz)
+	#Rename the gz file to orig.tar.gz
+	(cd $(GIT_ROOT)/../build; cp kafka_2.9.2-0.8.1.1.tgz kafka_2.9.2-0.8.1.1.orig.tar.gz)
+	#copy the debian  to build dir
+	cp -Rf kafka*/debian $(GIT_ROOT)/../build/kafka_2.9.2-0.8.1.1
+	#Build the kafka from the BUILD dir
+	(cd $(GIT_ROOT)/../build/kafka_2.9.2-0.8.1.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 all:$(PREP) \
-	kazoo libipfix docker-py expat
+	kazoo libipfix docker-py expat kafka
