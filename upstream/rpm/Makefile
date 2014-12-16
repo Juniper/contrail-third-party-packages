@@ -153,9 +153,19 @@ libipfix: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/libipfix*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/libipfix/libipfix*.tar.gz
 
+kafka: $(PREP)
+	@echo "About to make kafka"
+	#Fetch the source
+	spectool -g -R specs/kafka/kafka.spec -C specs/kafka/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka/ --spec specs/kafka/kafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/kafka/kafka*.tar.gz
+
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-lxml python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
-	xmltodict libvirt docker-py
+	xmltodict libvirt docker-py kafka
