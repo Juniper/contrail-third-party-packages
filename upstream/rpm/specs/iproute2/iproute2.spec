@@ -5,9 +5,8 @@
 Summary: Advanced IP routing and network device configuration tools
 Name: iproute
 Version: 3.1.0
-Release: 0%{?dist}
+Release: contrail%{?dist}
 Group: Applications/System
-#Source: http://developer.osdl.org/dev/iproute2/download/iproute2-%{up_version}.tar.bz2
 Source: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-3.1.0.tar.gz
 URL:    http://linux-net.osdl.org/index.php/Iproute2
 
