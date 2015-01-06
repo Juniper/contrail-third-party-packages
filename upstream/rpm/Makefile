@@ -18,6 +18,15 @@ ifmap-server: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/ifmap-server*.src.rpm --resultdir $(BUILD_BASE)/BUILD 
 	rm -f specs/ifmap-server/irond-0.3.2-src.zip
 
+iproute2: $(PREP)
+	@echo "About to make iproute2 package"
+	#Fetch the source
+	spectool -g -R specs/iproute2/iproute2.spec -C specs/iproute2/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/iproute2/ --spec specs/iproute2/iproute2.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/iproute*.src.rpm --resultdir $(BUILD_BASE)/BUILD 
+	rm -f specs/iproute2/iproute2-*.tar.gz
+
 python-pycassa: $(PREP)
 	@echo "About to make python-pycassa"
 	#Fetch the source
