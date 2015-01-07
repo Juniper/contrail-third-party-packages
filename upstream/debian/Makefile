@@ -82,4 +82,5 @@ all:$(PREP) \
 	expat \
 	kafka \
 	kazoo \
-	libipfix
+	libipfix \
+	lxml
