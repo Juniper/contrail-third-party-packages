@@ -1,0 +1,11 @@
+nodejs (0.8.15-1contrail1) precise; urgency=low
+
+  * Fix dest-dir location and rebuild for Ubuntu PPA
+
+ -- Sebastien Badia <seb@sebian.fr>  Sat, 17 May 2014 02:30:35 +0000
+
+nodejs (0.8.15-1) precise; urgency=low
+
+  * Initial release for Ubuntu Precise
+
+ -- Sebastien Badia <seb@sebian.fr>  Mon, 28 Apr 2014 17:29:38 +0200
