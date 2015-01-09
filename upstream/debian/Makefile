@@ -84,6 +84,18 @@ nodejs:$(PREP)
 	#(cd $(GIT_ROOT)/../build/nodejs; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 	(cd $(GIT_ROOT)/../build/nodejs; sbuild -A)
 
+librdkafka:$(PREP)
+	#copy the 0.8.5 orig.tar.gz file to build
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/ubuntu/+archive/primary/+files/librdkafka_0.8.5.orig.tar.gz)
+	#copy the debian file to build
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/ubuntu/+archive/primary/+files/librdkafka_0.8.5-2.debian.tar.xz)
+	#untar the orig.tgz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/librdkafka_0.8.5.orig.tar.gz)
+	#untar the .debian.gz file inside the untarred location
+	(cd $(GIT_ROOT)/../build/librdkafka*; tar xf ../librdkafka_0.8.5-2.debian.tar.xz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/librdkafka*; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -92,4 +104,5 @@ all:$(PREP) \
 	kazoo \
 	libipfix \
 	nodejs \
-	lxml
+	librdkafka \
+	lxml 
