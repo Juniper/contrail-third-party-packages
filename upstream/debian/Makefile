@@ -76,6 +76,14 @@ lxml:$(PREP)
 	#Build the lxml from the BUILD dir
 	(cd $(GIT_ROOT)/../build/lxml; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+nodejs:$(PREP)
+	#Copy the nodejs debian directory to build dir and prepare a .orig file
+	cp -R nodejs/ $(GIT_ROOT)/../build/
+	(cd $(GIT_ROOT)/../build/nodejs;bash $(GIT_ROOT)/upstream/debian/utils/get-sources.sh)
+	#Build the nodejs from the BUILD dir
+	#(cd $(GIT_ROOT)/../build/nodejs; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+	(cd $(GIT_ROOT)/../build/nodejs; sbuild -A)
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -83,4 +91,5 @@ all:$(PREP) \
 	kafka \
 	kazoo \
 	libipfix \
+	nodejs \
 	lxml
