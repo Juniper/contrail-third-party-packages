@@ -171,10 +171,22 @@ kafka: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/kafka/kafka*.tar.gz
 
+librdkafka: $(PREP)
+	@echo "Abt to make librdkafka"
+	#Fetch the source
+	(cd specs/librdkafka/; wget https://github.com/edenhill/librdkafka/archive/0.8.5.tar.gz)
+	#Rename the source tgz
+	mv specs/librdkafka/0.8.5.tar.gz specs/librdkafka/librdkafka-0.8.5.tar.gz
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/librdkafka/ --spec specs/librdkafka/librdkafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/librdkafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/librdkafka/librdkafka*.tar.gz
+	rm -rf specs/librdkafka/librdkafka-0.8.5
+
 
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-lxml python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
-	xmltodict libvirt docker-py kafka
+	xmltodict libvirt docker-py kafka librdkafka
