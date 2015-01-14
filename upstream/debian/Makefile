@@ -88,11 +88,11 @@ librdkafka:$(PREP)
 	#copy the 0.8.5 orig.tar.gz file to build
 	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/ubuntu/+archive/primary/+files/librdkafka_0.8.5.orig.tar.gz)
 	#copy the debian file to build
-	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/ubuntu/+archive/primary/+files/librdkafka_0.8.5-2.debian.tar.xz)
-	#untar the orig.tgz
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/librdkafka_0.8.5.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build; mv librdkafka-0.8.5 librdkafka-0.8.5-2)
+	(cd $(GIT_ROOT)/../build; mv librdkafka_0.8.5.orig.tar.gz librdkafka_0.8.5-2.orig.tar.gz)
 	#untar the .debian.gz file inside the untarred location
-	(cd $(GIT_ROOT)/../build/librdkafka*; tar xf ../librdkafka_0.8.5-2.debian.tar.xz)
+	cp -rf librdkafka*/debian $(GIT_ROOT)/../build/librdkafka*/
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/librdkafka*; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
