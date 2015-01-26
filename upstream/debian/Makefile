@@ -94,7 +94,20 @@ librdkafka:$(PREP)
 	#untar the .debian.gz file inside the untarred location
 	cp -rf librdkafka*/debian $(GIT_ROOT)/../build/librdkafka*/
 	#Issue pdebuild inside the source
-	(cd $(GIT_ROOT)/../build/librdkafka*; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+	#(cd $(GIT_ROOT)/../build/librdkafka*; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+	(cd $(GIT_ROOT)/../build/librdkafka*; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc --auto-debsign  --debsign-k $(GPGKEY))
+
+kafka-python:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-0.9.2.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-0.9.2.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr kafka-python/debian $(GIT_ROOT)/../build/kafka-python-0.9.2)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/kafka-python-0.9.2.tar.gz $(GIT_ROOT)/../build/kafka-python_0.9.2.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc --auto-debsign  --debsign-k $(GPGKEY))
 
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
@@ -105,4 +118,5 @@ all:$(PREP) \
 	libipfix \
 	nodejs \
 	librdkafka \
-	lxml 
+	lxml \
+	kafka-python
