@@ -1,7 +1,8 @@
+%define _relstr 0contrail0
 Name:    librdkafka
 # NOTE: Make sure to update this to match rdkafka.h version
 Version: 0.8.5
-Release: 0
+Release: 2.%{_relstr}%{?dist}
 %define soname 1
 
 Summary: The Apache Kafka C library
