@@ -23,7 +23,13 @@ The GNU wget program downloads files from the Internet using the command-line.
 
 %install
 pushd %{_builddir}/kafka*/
-find . -print | sed 's;^.;'"%{buildroot}/usr/share/kafka/"';'| xargs install -d -m 755
+for file in $(find . -type d); do
+    install -d ${file} %{buildroot}/usr/share/kafka/${file}
+done
+for file in $(find . -type f); do
+    install -D ${file} %{buildroot}/usr/share/kafka/${file}
+done
+
 popd
 
 %files

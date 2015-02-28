@@ -167,8 +167,8 @@ kafka: $(PREP)
 	#Fetch the source
 	spectool -g -R specs/kafka/kafka.spec -C specs/kafka/
 	#mock instructions
-	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka/ --spec specs/kafka/kafka.spec --resultdir=$(BUILD_BASE)/BUILD
-	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka/ --spec specs/kafka/kafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/kafka/kafka*.tar.gz
 
 librdkafka: $(PREP)
@@ -178,10 +178,19 @@ librdkafka: $(PREP)
 	#Rename the source tgz
 	mv specs/librdkafka/0.8.5.tar.gz specs/librdkafka/librdkafka-0.8.5.tar.gz
 	#mock instructions
-	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/librdkafka/ --spec specs/librdkafka/librdkafka.spec --resultdir=$(BUILD_BASE)/BUILD
-	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/librdkafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/librdkafka/ --spec specs/librdkafka/librdkafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/librdkafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/librdkafka/librdkafka*.tar.gz
-	rm -rf specs/librdkafka/librdkafka-0.8.5
+	rm -rf specs/librdkafka/librdkafka-0.8.5-2
+
+kafka-python: $(PREP)
+	@echo "About to make kafka-python"
+	#Fetch the source
+	spectool -g -R specs/kafka-python/kafka-python.spec -C specs/kafka-python/
+	#mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka-python/ --spec specs/kafka-python/kafka-python.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kafka-python*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/kafka-python/kafka-python*.tar.gz
 
 
 all:$(PREP) \
@@ -189,4 +198,5 @@ all:$(PREP) \
 	python-simplejson python-lxml python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
-	xmltodict libvirt docker-py kafka librdkafka
+	xmltodict libvirt docker-py kafka librdkafka \
+        kafka-python
