@@ -35,6 +35,14 @@ docker-py:$(PREP)
 	#Build the docker-py from the BUILD dir	
 	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+nova-docker: $(PREP)
+	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b opencontrail git@github.com:pedro-r-marques/nova-docker.git; fi)
+	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post190.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post190.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post190.orig.tar.gz)
+	cp -Rf nova-docker/debian $(GIT_ROOT)/../build/nova-docker-0.0.0.post190
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post190; sudo debuild)
+
 libipfix:$(PREP)
 	#copy the libipfix debian directory to build dir and prepare a .orig file
 	cp -Rf libipfix/libipfix_110209 $(GIT_ROOT)/../build/libipfix_110209-1
@@ -99,6 +107,7 @@ librdkafka:$(PREP)
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
+        nova-docker \
 	expat \
 	kafka \
 	kazoo \
