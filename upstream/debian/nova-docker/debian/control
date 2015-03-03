@@ -12,6 +12,7 @@ Package: nova-docker
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
+         python-contrail-vrouter-api,
          nova-compute,
          lxc-docker,
          python-websocket,
