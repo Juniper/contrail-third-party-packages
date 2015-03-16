@@ -109,6 +109,19 @@ kafka-python:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc --auto-debsign  --debsign-k $(GPGKEY))
 
+python-redis:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build;wget https://pypi.python.org/packages/source/r/redis/redis-2.10.3.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf redis-2.10.3.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr redis/debian $(GIT_ROOT)/../build/redis-2.10.3)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/redis-2.10.3.tar.gz $(GIT_ROOT)/../build/redis_2.10.3.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/redis-2.10.3;sudo pdebuild --use-pdebuild-internal --debbuildopts -tc --auto-debsign  --debsign-k $(GPGKEY))
+	
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -119,4 +132,5 @@ all:$(PREP) \
 	nodejs \
 	librdkafka \
 	lxml \
-	kafka-python
+	kafka-python \
+	python-redis

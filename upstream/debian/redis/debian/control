@@ -1,0 +1,14 @@
+Source: redis
+Section: python
+Priority: extra
+Maintainer: Arvind Viswanathan <arvindv@unknown>
+Build-Depends: python-setuptools (>= 0.6b3), python-all (>= 2.6.6-3), debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+#Vcs-Git: git://git.debian.org/collab-maint/redis.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/redis.git;a=summary
+
+Package: python-redis
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

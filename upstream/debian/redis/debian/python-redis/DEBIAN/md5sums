@@ -1,0 +1,16 @@
+0dcbbc123f92f7371cfed40ceeade66e  usr/share/doc/python-redis/README.Debian
+dd42fcde38945ed25b1c09a374fdb3de  usr/share/doc/python-redis/README.rst.gz
+999e0106df1e16d69d8ad123af03021e  usr/share/doc/python-redis/changelog.Debian.gz
+1220c86e4ed45ea322b44e2a022e4a5b  usr/share/doc/python-redis/copyright
+08467ad62204f3562a6c7fb49291ce9e  usr/share/pyshared/redis-2.10.3.egg-info/PKG-INFO
+9d6e442c778f175f151e563714040dac  usr/share/pyshared/redis-2.10.3.egg-info/SOURCES.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/share/pyshared/redis-2.10.3.egg-info/dependency_links.txt
+7b80ba2cca2d34313d17e11ccabd19e2  usr/share/pyshared/redis-2.10.3.egg-info/top_level.txt
+44c2e4ed90311e9208ccbab9532c0b3d  usr/share/pyshared/redis/__init__.py
+dcf72290eb01434efb9099ecfc21263a  usr/share/pyshared/redis/_compat.py
+4c0d8b91afc7898ab664fe79732193f3  usr/share/pyshared/redis/client.py
+a81e76962e99aecadbade6dc0e3bc01a  usr/share/pyshared/redis/connection.py
+653abc17e9cd2b9593c1a2de39effc04  usr/share/pyshared/redis/exceptions.py
+3497e5744606dbc175261c1f5cbe746c  usr/share/pyshared/redis/lock.py
+67b005dcea6f82a8fa2c620dbfc51783  usr/share/pyshared/redis/sentinel.py
+b35e6f403a5f1a3101f2bd8408a77eeb  usr/share/pyshared/redis/utils.py

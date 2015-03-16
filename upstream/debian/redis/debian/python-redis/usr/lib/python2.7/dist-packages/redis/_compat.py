@@ -1,0 +1,1 @@
+../../../../share/pyshared/redis/_compat.py

@@ -1,0 +1,5 @@
+redis (2.10.3-0contrail0) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Arvind Viswanathan (New pgp key) <arvindv@juniper.net>  Mon, 16 Mar 2015 11:41:27 -0700

@@ -1,0 +1,10 @@
+Package: python-redis
+Source: redis
+Version: 2.10.3-0contrail0
+Architecture: amd64
+Maintainer: Arvind Viswanathan <arvindv@unknown>
+Installed-Size: 260
+Section: python
+Priority: extra
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

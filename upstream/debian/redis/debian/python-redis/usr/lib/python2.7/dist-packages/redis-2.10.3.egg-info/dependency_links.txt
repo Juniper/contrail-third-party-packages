@@ -1,0 +1,1 @@
+../../../../share/pyshared/redis-2.10.3.egg-info/dependency_links.txt
