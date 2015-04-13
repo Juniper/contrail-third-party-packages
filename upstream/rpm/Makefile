@@ -1,4 +1,5 @@
 MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
+#MOCK_CONFIG_LOCATION = epel-7-x86_64
 GIT_ROOT     := $(PWD)/../..
 BUILD_BASE          := $(GIT_ROOT)/..
 PREP = prep
@@ -192,6 +193,25 @@ kafka-python: $(PREP)
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kafka-python*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/kafka-python/kafka-python*.tar.gz
 
+python-docker-py: $(PREP)
+	@echo "About to make python-docker-py"
+	# Fetch the source
+	(spectool -g -R specs/docker-py/python-docker-py.spec -C specs/docker-py/)
+	(mv specs/docker-py/docker-py-0.7.2.tar.gz specs/docker-py/python-docker-py-0.7.2.tar.gz)
+	# mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/docker-py/ --spec specs/docker-py/python-docker-py.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-docker-py*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/docker-py/python-docker-py*.tar.gz
+
+python-requests: $(PREP)
+	@echo "About to make python-requests"
+	# Fetch the source
+	(spectool -g -R specs/requests/python-requests.spec -C specs/requests/)
+	(mv specs/requests/requests-2.6.0.tar.gz specs/requests/python-requests-2.6.0.tar.gz)
+	# mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/requests/ --spec specs/requests/python-requests.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-requests*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/requests/python-requests*.tar.gz
 
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
