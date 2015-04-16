@@ -1,5 +1,5 @@
-nova-docker (0.0.0.post114-0contrail0) trusty; urgency=low
+nova-docker (0.0.0.post116-0contrail0) trusty; urgency=low
 
-  * Initial release - Nova docker package.
+  * Initial release - Nova docker package for icehouse release.
 
  -- Ignatious Johnson <ijohnson@juniper.net>  Wed, 25 Feb 2015 13:52:24 -0800
