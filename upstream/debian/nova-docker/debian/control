@@ -1,0 +1,23 @@
+Source: nova-docker
+Section: unknown
+Priority: optional
+Maintainer: Ted Ghose <tghose@juniper.net>
+Build-Depends: debhelper (>= 8.0.0), python-setuptools (>= 0.6b3), python-all (>= 2.6.6-3)
+Standards-Version: 3.9.4
+Homepage: https://github.com/pedro-r-marques/nova-docker.git
+#Vcs-Git: git://git.debian.org/collab-maint/nova-docker.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/nova-docker.git;a=summary
+
+Package: nova-docker
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         python-contrail-vrouter-api,
+         nova-compute,
+         lxc-docker,
+         python-websocket,
+         python-oslo.config (>= 1:1.6.1-0ubuntu1),
+         python-oslo.concurrency (>= 1.4.1-0ubuntu1),
+         python-oslo.rootwrap (>= 1.5.0-0ubuntu3),
+         python-oslo.serialization,
+Description: Docker driver for OpenStack Nova

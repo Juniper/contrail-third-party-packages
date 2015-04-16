@@ -1,0 +1,5 @@
+nova-docker (0.0.0.post190-1contrail1) unstable; urgency=low
+
+  * Initial release - Nova docker package with a dictionary to store memory information.
+
+ -- Ted Ghose <tghose@juniper.net>  Wed, 25 Feb 2015 13:52:24 -0800
