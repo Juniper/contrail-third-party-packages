@@ -35,13 +35,29 @@ docker-py:$(PREP)
 	#Build the docker-py from the BUILD dir	
 	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
-nova-docker: $(PREP)
-	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b opencontrail git@github.com:pedro-r-marques/nova-docker.git; fi)
+nova-docker-juno: $(PREP)
+	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/juno git@github.com:Juniper/nova-docker.git; fi)
 	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
-	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post190.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post190.orig.tar.gz
-	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post190.orig.tar.gz)
-	cp -Rf nova-docker/debian $(GIT_ROOT)/../build/nova-docker-0.0.0.post190
-	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post190; sudo debuild)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post143.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post143.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post143.orig.tar.gz)
+	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post143/debian/; cp -Rf nova-docker/debian/juno/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post143/debian/
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post143; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+nova-docker-icehouse: $(PREP)
+	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/icehouse git@github.com:Juniper/nova-docker.git; fi)
+	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post114.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post114.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post114.orig.tar.gz)
+	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post114/debian/; cp -Rf nova-docker/debian/icehouse/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post114/debian
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post114; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+oslo-concurrency:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/o/oslo.concurrency/oslo.concurrency-1.4.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/oslo.concurrency-1.4.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; cp oslo.concurrency-1.4.1.tar.gz python-oslo.concurrency_1.4.1.orig.tar.gz)
+	cp -Rf oslo.concurrency-1.4.1/debian $(GIT_ROOT)/../build/oslo.concurrency-1.4.1
+	#Build the docker-py from the BUILD dir
+	(cd $(GIT_ROOT)/../build/oslo.concurrency-1.4.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 libipfix:$(PREP)
 	#copy the libipfix debian directory to build dir and prepare a .orig file
