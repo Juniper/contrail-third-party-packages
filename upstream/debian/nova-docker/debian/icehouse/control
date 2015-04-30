@@ -11,7 +11,7 @@ Homepage: https://wiki.openstack.org/wiki/Docker
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/nova-docker.git;a=summary
 
 Package: nova-docker
-Architecture: any
+Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          nova-compute,

@@ -38,18 +38,18 @@ docker-py:$(PREP)
 nova-docker-juno: $(PREP)
 	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/juno git@github.com:Juniper/nova-docker.git; fi)
 	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
-	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post145.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post145.orig.tar.gz
-	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post145.orig.tar.gz)
-	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post145/debian/; cp -Rf nova-docker/debian/juno/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post145/debian/
-	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post145; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post147.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post147.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post147.orig.tar.gz)
+	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post147/debian/; cp -Rf nova-docker/debian/juno/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post147/debian/
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post147; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 nova-docker-icehouse: $(PREP)
 	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/icehouse git@github.com:Juniper/nova-docker.git; fi)
 	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
-	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post116.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post116.orig.tar.gz
-	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post116.orig.tar.gz)
-	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post116/debian/; cp -Rf nova-docker/debian/icehouse/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post116/debian
-	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post116; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post118.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post118.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post118.orig.tar.gz)
+	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post118/debian/; cp -Rf nova-docker/debian/icehouse/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post118/debian
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post118; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 oslo-concurrency:$(PREP)
 	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/o/oslo.concurrency/oslo.concurrency-1.4.1.tar.gz)
