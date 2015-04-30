@@ -9,7 +9,7 @@ Standards-Version: 3.9.4
 Homepage: https://wiki.openstack.org/wiki/Docker
 
 Package: nova-docker
-Architecture: any
+Architecture: all
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          nova-compute,
