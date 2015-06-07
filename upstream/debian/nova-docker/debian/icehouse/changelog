@@ -1,3 +1,14 @@
+nova-docker (0.0.0.post124-0contrail0) trusty; urgency=low
+   * Fix for thr bugs https://bugs.launchpad.net/juniperopenstack/+bug/1458655, 1458553
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Mon, 01 Jun 2015 10:14:40 -0700
+
+nova-docker (0.0.0.post122-0contrail0) trusty; urgency=low
+
+   * Fix for thr bugs https://bugs.launchpad.net/juniperopenstack/+bug/1452151, 1455616, 1455168, 1454655
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Fri, 22 May 2015 12:53:08 -0700
+
 nova-docker (0.0.0.post118-0contrail0) trusty; urgency=low
 
   * Fix bug - https://bugs.launchpad.net/juniperopenstack/+bug/1446929

@@ -9,7 +9,7 @@ Standards-Version: 3.9.4
 Homepage: http://docs.openstack.org/developer/oslo.concurrency/
 
 Package: python-oslo.concurrency
-Architecture: any
+Architecture: all
 Depends: python-babel (>= 1.3),
          python-fixtures (>= 0.3.14),
          python-iso8601 (>= 0.1.9),
@@ -19,6 +19,7 @@ Depends: python-babel (>= 1.3),
          python-pbr (>= 0.6),
          python-posix-ipc,
          python-six (>= 1.7.0),
+         python-retrying,
          ${shlibs:Depends},
          ${misc:Depends}
 Description: Oslo concurrency library
