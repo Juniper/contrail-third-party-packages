@@ -127,11 +127,11 @@ kafka-python:$(PREP)
 	#untar the file
 	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-0.9.2.tar.gz)
 	#Copy the debian from the repo to the untarred location
-	(cp -avr kafka-python/debian $(GIT_ROOT)/../build/kafka-python-0.9.2)
+	(cp -avr kafka-python-0.9.2/debian $(GIT_ROOT)/../build/kafka-python-0.9.2)
 	#Create the .orig file
-	(mv $(GIT_ROOT)/../build/kafka-python-0.9.2.tar.gz $(GIT_ROOT)/../build/kafka-python_0.9.2.orig.tar.gz)
+	(mv $(GIT_ROOT)/../build/kafka-python-0.9.2.tar.gz $(GIT_ROOT)/../build/python-kafka-python_0.9.2.orig.tar.gz)
 	#Issue pdebuild inside the source
-	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc --auto-debsign  --debsign-k $(GPGKEY))
+	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
