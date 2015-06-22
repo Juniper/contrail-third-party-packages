@@ -1,0 +1,5 @@
+python-kafka-python (0.9.2-0contrail0) precise; urgency=low
+
+  * Debian package for kafka 
+
+ -- Arvind Viswanathan (New pgp key) <arvindv@juniper.net>  Mon, 22 Jun 2015 11:12:53 -0700

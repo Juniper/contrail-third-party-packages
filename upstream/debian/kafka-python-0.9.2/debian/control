@@ -1,0 +1,15 @@
+Source: python-kafka-python
+Section: python
+Priority: optional 
+Maintainer: Arvind Viswanathan <arvindv@unknown>
+Build-Depends: python-setuptools (>= 0.6b3), python-all (>= 2.6.6-3), debhelper (>= 7) 
+Standards-Version: 3.9.2
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/python-kafka-python.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/python-kafka-python.git;a=summary
+
+Package: python-kafka-python
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
