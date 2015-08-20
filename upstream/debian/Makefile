@@ -133,6 +133,24 @@ kafka-python:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+horizon:$(PREP)
+	#Update the pbuilder with canonical cloud repo and update it
+	#.pbuilderrc-cloud contains trusty repository for precise we may have to add
+	sudo cp utils/.pbuilderrc-cloud ~/.pbuilderrc; \
+	#Put a script in hooks dir of pbuilder to export the gpg keys of the repo
+	#the keyring is for canonical trusty. It may change for precise
+	if [ ! -d "/var/cache/pbuilder/hook.d" ]; then \
+		sudo mkdir /var/cache/pbuilder/hook.d; \
+		sudo cp utils/E01cacnonical-keyring /var/cache/pbuilder/hook.d/; \
+		sudo chmod a+x /var/cache/pbuilder/hook.d/E01cacnonical-keyring;	\
+	fi; \
+	#Update the pbuilder with these changes
+	sudo pbuilder --update --override-config --distribution trusty
+	#copy the horizon folder to the build dir
+	(cp -avr horizon-2014.2.2-0ubuntu1 $(GIT_ROOT)/../build/)
+	#Issue pdebuild command	
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2-0ubuntu1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -144,4 +162,5 @@ all:$(PREP) \
 	nodejs \
 	librdkafka \
 	lxml \
-	kafka-python
+	kafka-python \
+        horizon
