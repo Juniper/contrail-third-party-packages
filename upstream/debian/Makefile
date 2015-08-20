@@ -133,6 +133,39 @@ kafka-python:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+horizon:$(PREP)
+	#Update the pbuilder with canonical cloud repo and update it
+	#.pbuilderrc-cloud contains trusty repository for precise we may have to add
+	sudo cp utils/.pbuilderrc-cloud ~/.pbuilderrc; \
+	#Put a script in hooks dir of pbuilder to export the gpg keys of the repo
+	#the keyring is for canonical trusty. It may change for precise
+	if [ ! -d "/var/cache/pbuilder/hook.d" ]; then \
+		sudo mkdir /var/cache/pbuilder/hook.d; \
+		sudo cp utils/E01cacnonical-keyring /var/cache/pbuilder/hook.d/; \
+		sudo chmod a+x /var/cache/pbuilder/hook.d/E01cacnonical-keyring;	\
+	fi; \
+	#Update the pbuilder with these changes
+	sudo pbuilder --update --override-config --distribution trusty
+	#Get the horizon source and the orig file
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/ubuntu/+archive/primary/+files/horizon_2014.2.2.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/ubuntu/+archive/primary/+files/horizon_2014.2.2.orig-xstatic.tar.gz)
+	#untar the contents
+	(cd $(GIT_ROOT)/../build;tar -zxvf horizon_2014.2.2.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build;tar -zxvf horizon_2014.2.2.orig-xstatic.tar.gz)
+	#Move the xstatic folder inside the horizon
+	(cd $(GIT_ROOT)/../build;mv xstatic horizon-2014.2.2/)
+	#copy the horizon/debian folder to the build dir
+	(cp -avr horizon-2014.2.2/debian $(GIT_ROOT)/../build/horizon-2014.2.2/)
+	#Apply the patches manually because patch format is not quilt(it wont be applied automatically as part of build)
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/contrail-floating-ip.patch)
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/fix-dashboard-django-wsgi.patch)
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/fix-dashboard-manage.patch)
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/ubuntu_settings.patch)
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/embedded-xstatic.patch)
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/add-juju-environment-download.patch)	
+	#Issue pdebuild command	
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -144,4 +177,5 @@ all:$(PREP) \
 	nodejs \
 	librdkafka \
 	lxml \
-	kafka-python
+	kafka-python \
+        horizon
