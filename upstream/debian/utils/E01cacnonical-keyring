@@ -1,0 +1,2 @@
+#!/bin/sh
+apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 5EDB1B62EC4926EA
