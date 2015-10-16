@@ -1,5 +1,5 @@
-MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
-#MOCK_CONFIG_LOCATION = epel-7-x86_64
+#MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
+MOCK_CONFIG_LOCATION = epel-7-x86_64
 GIT_ROOT     := $(PWD)/../..
 BUILD_BASE          := $(GIT_ROOT)/..
 PREP = prep
@@ -171,6 +171,15 @@ kafka: $(PREP)
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka/ --spec specs/kafka/kafka.spec --resultdir=$(BUILD_BASE)/BUILD
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/kafka/kafka*.tar.gz
+
+kafka_2.10: $(PREP)
+	@echo "About to make kafka"
+	#Fetch the source
+	(cd specs/kafka_2.10/;wget https://github.com/Juniper/contrail-third-party-cache/blob/master/kafka/kafka_2.10-0.9.0.0-SNAPSHOT.tgz?raw=true -O kafka_2.10-0.9.0.0-SNAPSHOT.tgz)
+	#mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka_2.10/ --spec specs/kafka_2.10/kafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/kafka_2.10/kafka*.tgz
 
 librdkafka: $(PREP)
 	@echo "Abt to make librdkafka"
