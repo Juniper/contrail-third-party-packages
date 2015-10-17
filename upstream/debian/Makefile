@@ -93,6 +93,18 @@ kafka:$(PREP)
 	#Build the kafka from the BUILD dir
 	(cd $(GIT_ROOT)/../build/kafka_2.9.2-0.8.1.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+kafka_2.10:$(PREP)
+	#Get the kafka binary pkg
+	(cd $(GIT_ROOT)/../build/; wget https://github.com/Juniper/contrail-third-party-cache/blob/master/kafka/kafka_2.10-0.9.0.0-SNAPSHOT.tgz?raw=true -O kafka_2.10-0.9.0.0-SNAPSHOT.tgz)
+	#untar the gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/kafka_2.10-0.9.0.0-SNAPSHOT.tgz)
+	#Rename the gz file to orig.tar.gz
+	(cd $(GIT_ROOT)/../build; cp kafka_2.10-0.9.0.0-SNAPSHOT.tgz kafka_2.10-0.9.0.0-SNAPSHOT.orig.tar.gz)
+	#copy the debian  to build dir
+	cp -Rf kafka_2.10-0.9.0.0/debian $(GIT_ROOT)/../build/kafka_2.10-0.9.0.0-SNAPSHOT
+	#Build the kafka from the BUILD dir
+	(cd $(GIT_ROOT)/../build/kafka_2.10-0.9.0.0-SNAPSHOT; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 lxml:$(PREP)
 	#Copy the lxml debian directory to build dir and prepare a .orig file
 	cp -R lxml/ $(GIT_ROOT)/../build/
@@ -172,6 +184,7 @@ all:$(PREP) \
         nova-docker \
 	expat \
 	kafka \
+	kafka_2.10 \
 	kazoo \
 	libipfix \
 	nodejs \
