@@ -204,6 +204,18 @@ horizon-kilo:$(PREP)
 	#Issue pdebuild command
 	(cd $(GIT_ROOT)/../build/horizon-2015.1.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+python-cassandra:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/c/cassandra-driver/cassandra-driver-3.0.0.tar.gz#md5=c853a91c63d3ca4e646c4a8ee2ebed05)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/cassandra-driver-3.0.0.tar.gz)
+	# This depends on having extensions so do python build and clean 
+	# Then prepare orig.tar.gz so that it does not complain abt upstream changes
+	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; python setup.py build)
+	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; python setup.py clean)
+	(cd $(GIT_ROOT)/../build/; tar -zcf cassandra-driver_3.0.0.orig.tar.gz cassandra-driver-3.0.0)
+	cp -Rf python-cassandra/debian $(GIT_ROOT)/../build/cassandra-driver-3.0.0
+	#Build the python-cassandra from the BUILD dir 
+	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; pdebuild --use-pdebuild-internal --debbuildopts "-tc")
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -217,4 +229,5 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
-        horizon
+        horizon \
+        python-cassandra
