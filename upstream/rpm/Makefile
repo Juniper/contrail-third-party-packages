@@ -231,6 +231,15 @@ python-consistent_hash: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-consistent_hash*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-consistent_hash/consistent_hash-*.tar.gz
 
+python-jsonpickle: $(PREP)
+	@echo "About to make python-jsonpickle"
+	#Fetch the source
+	spectool -g -R specs/python-jsonpickle/python-jsonpickle.spec -C specs/python-jsonpickle/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-jsonpickle/ --spec specs/python-jsonpickle/python-jsonpickle.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-jsonpickle*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-jsonpickle/jsonpickle-*.tar.gz
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-lxml python-bottle \
