@@ -1,5 +1,5 @@
-#MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
-MOCK_CONFIG_LOCATION = epel-7-x86_64
+MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
+#MOCK_CONFIG_LOCATION = epel-7-x86_64
 GIT_ROOT     := $(PWD)/../..
 BUILD_BASE          := $(GIT_ROOT)/..
 PREP = prep
@@ -241,6 +241,16 @@ librdkafka-0.9.0: $(PREP)
 	rm -f specs/librdkafka-0.9.0/0.9.0.zip
 	rm -rf specs/librdkafka-0.9.0/librdkafka-0.9.0
 
+zookeeper-3.4.8: $(PREP)
+	@echo "Abt to make zookeeper"
+	#Fetch the source
+	(cd specs/zookeeper/; wget http://mirror.cogentco.com/pub/apache/zookeeper/stable/zookeeper-3.4.8.tar.gz)
+	#mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/zookeeper/ --spec specs/zookeeper/zookeeper.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/zookeeper*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/zookeeper/zookeeper-3.4.8.tar.gz
+	rm -rf specs/zookeeper/zookeeper-3.4.8
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-lxml python-bottle \
@@ -248,4 +258,4 @@ all:$(PREP) \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-	python-cassandra librdkafka-0.9.0
+	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8
