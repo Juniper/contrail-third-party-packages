@@ -251,6 +251,15 @@ zookeeper-3.4.8: $(PREP)
 	rm -f specs/zookeeper/zookeeper-3.4.8.tar.gz
 	rm -rf specs/zookeeper/zookeeper-3.4.8
 
+python-sseclient: $(PREP)
+	@echo "About to make python-sseclient"
+	#Fetch the source
+	spectool -g -R specs/python-sseclient/python-sseclient.spec -C specs/python-sseclient/
+	#mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-sseclient/ --spec specs/python-sseclient/python-sseclient.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-sseclient*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-sseclient/sseclient*.tar.gz
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-lxml python-bottle \
@@ -258,4 +267,4 @@ all:$(PREP) \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8
+	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient

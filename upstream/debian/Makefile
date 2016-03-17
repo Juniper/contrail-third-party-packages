@@ -216,6 +216,18 @@ python-cassandra:$(PREP)
 	#Build the python-cassandra from the BUILD dir 
 	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; pdebuild --use-pdebuild-internal --debbuildopts "-tc")
 
+python-sseclient:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/s/sseclient/sseclient-0.0.11.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf sseclient-0.0.11.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-sseclient/debian $(GIT_ROOT)/../build/sseclient-0.0.11)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/sseclient-0.0.11.tar.gz $(GIT_ROOT)/../build/python-sseclient_0.0.11.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/sseclient-0.0.11; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -230,4 +242,5 @@ all:$(PREP) \
 	lxml \
 	kafka-python \
         horizon \
-        python-cassandra
+        python-cassandra \
+        python-sseclient
