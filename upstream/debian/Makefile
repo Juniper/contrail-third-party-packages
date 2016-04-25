@@ -35,6 +35,14 @@ docker-py:$(PREP)
 	#Build the docker-py from the BUILD dir	
 	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+nova-docker-kilo: $(PREP)
+	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/kilo git@github.com:Juniper/nova-docker.git; fi)
+	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.0.post196.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.0.post196.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.0.post196.orig.tar.gz)
+	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.0.post196/debian/; cp -Rf nova-docker/debian/kilo/* $(GIT_ROOT)/../build/nova-docker-0.0.0.post196/debian
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.0.post196; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 nova-docker-juno: $(PREP)
 	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/juno git@github.com:Juniper/nova-docker.git; fi)
 	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)

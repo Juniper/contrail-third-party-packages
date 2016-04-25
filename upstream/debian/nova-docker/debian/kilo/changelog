@@ -1,0 +1,11 @@
+nova-docker (0.0.0.post196-0contrail0) trusty; urgency=low
+
+  * Fix for the bug https://bugs.launchpad.net/juniperopenstack/trunk/+bug/1548761, building PPA from juniper repo
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Tue, 23 Feb 2016 09:07:17 -0800
+
+nova-docker (0.0.0.post190-0contrail0) trusty; urgency=low
+
+  * Initial release - Nova docker package for kilo release.
+
+ -- Ignatious Johnson <ijohnson@juniper.net>  Fri, 15 Jan 2016 12:53:32 -0800
