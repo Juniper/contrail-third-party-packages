@@ -1,8 +1,0 @@
-zope.interface >= 3.8.0
-
-[test]
-zope.interface >= 3.8.0
-coverage
-mock
-nose
-gevent
