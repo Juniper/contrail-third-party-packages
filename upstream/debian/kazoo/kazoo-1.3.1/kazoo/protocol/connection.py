@@ -580,7 +580,8 @@ class ConnectionHandler(object):
                           client.read_only)
 
         connect_result, zxid = self._invoke(client._session_timeout / 1000.0,
-                          connect)
+                                            connect)
+
         if connect_result.time_out <= 0:
             raise SessionExpiredError("Session has expired")
 
