@@ -27,13 +27,29 @@ kazoo:$(PREP)
 	#Build the kazoo from the BUILD dir
 	(cd $(GIT_ROOT)/../build/kazoo-1.3.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
-docker-py:$(PREP)
+docker-py-1.3.0:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/d/docker-py/docker-py-1.3.0.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/docker-py-1.3.0.tar.gz)
+	(cd $(GIT_ROOT)/../build; cp docker-py-1.3.0.tar.gz docker-py_1.3.0.orig.tar.gz)
+	cp -Rf docker-py-1.3.0/debian $(GIT_ROOT)/../build/docker-py-1.3.0
+	#Build the docker-py from the BUILD dir
+	(cd $(GIT_ROOT)/../build/docker-py-1.3.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+docker-py-0.6.0:$(PREP)
 	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/d/docker-py/docker-py-0.6.0.tar.gz)
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/docker-py-0.6.0.tar.gz)
 	(cd $(GIT_ROOT)/../build; cp docker-py-0.6.0.tar.gz docker-py_0.6.0.orig.tar.gz)
-	cp -Rf docker-py/debian $(GIT_ROOT)/../build/docker-py-0.6.0
+	cp -Rf docker-py-0.6.0/debian $(GIT_ROOT)/../build/docker-py-0.6.0
 	#Build the docker-py from the BUILD dir	
 	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+nova-docker-liberty: $(PREP)
+	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/liberty git@github.com:Juniper/nova-docker.git; fi)
+	(cd $(GIT_ROOT)/../build/nova-docker/; python setup.py sdist)
+	cp $(GIT_ROOT)/../build/nova-docker/dist/nova-docker-0.0.1.dev241.tar.gz $(GIT_ROOT)/../build/nova-docker_0.0.1.dev241.orig.tar.gz
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/nova-docker_0.0.1.dev241.orig.tar.gz)
+	mkdir -p $(GIT_ROOT)/../build/nova-docker-0.0.1.dev241/debian/; cp -Rf nova-docker/debian/liberty/* $(GIT_ROOT)/../build/nova-docker-0.0.1.dev241/debian
+	(cd $(GIT_ROOT)/../build/nova-docker-0.0.1.dev241; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 nova-docker-kilo: $(PREP)
 	(cd $(GIT_ROOT)/../build; if [ -d nova-docker ] ; then cd nova-docker && echo "git clean -f && git pull"; else git clone -b stable/kilo git@github.com:Juniper/nova-docker.git; fi)

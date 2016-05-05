@@ -1,0 +1,57 @@
+--- a/docker/client.py
++++ b/docker/client.py
+@@ -51,9 +51,6 @@
+                 'stream': 1
+             }
+ 
+-        if ws:
+-            return self._attach_websocket(container, params)
+-
+         u = self._url("/containers/{0}/attach".format(container))
+         return self._get_raw_response_socket(self.post(
+             u, None, params=self._attach_params(params), stream=True))
+--- a/docker/clientbase.py
++++ b/docker/clientbase.py
+@@ -4,7 +4,6 @@
+ import requests
+ import requests.exceptions
+ import six
+-import websocket
+ 
+ 
+ from . import constants
+@@ -132,18 +131,6 @@
+             'stream': 1
+         }
+ 
+-    @check_resource
+-    def _attach_websocket(self, container, params=None):
+-        url = self._url("/containers/{0}/attach/ws".format(container))
+-        req = requests.Request("POST", url, params=self._attach_params(params))
+-        full_url = req.prepare().url
+-        full_url = full_url.replace("http://", "ws://", 1)
+-        full_url = full_url.replace("https://", "wss://", 1)
+-        return self._create_websocket_connection(full_url)
+-
+-    def _create_websocket_connection(self, url):
+-        return websocket.create_connection(url)
+-
+     def _get_raw_response_socket(self, response):
+         self._raise_for_status(response)
+         if six.PY3:
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,3 +1,2 @@
+ requests==2.5.3
+ six>=1.3.0
+-websocket-client==0.32.0
+--- a/setup.py
++++ b/setup.py
+@@ -9,7 +9,6 @@
+ requirements = [
+     'requests >= 2.5.2',
+     'six >= 1.3.0',
+-    'websocket-client >= 0.32.0',
+ ]
+ 
+ exec(open('docker/version.py').read())
