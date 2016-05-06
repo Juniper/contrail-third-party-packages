@@ -1,0 +1,5 @@
+docker-py (1.3.0-1contrail1) trusty; urgency=medium
+
+  * Initial build of python-docker-py from surce version 1.3.0, without websocket
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Thu, 05 May 2016 12:34:44 -0700
