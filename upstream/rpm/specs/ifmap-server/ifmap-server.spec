@@ -1,4 +1,4 @@
-%define         _relstr 2contrail
+%define         _relstr 3contrail
 Name:               ifmap-server 
 Version:            0.3.2 
 Release:            %{_relstr}%{?dist}
@@ -26,6 +26,7 @@ Requires: slf4j
 Requires: apache-commons-codec
 Requires: log4j
 Requires: hc-httpcore
+Obsoletes: irond
 
 %description
 ifmap-server  
