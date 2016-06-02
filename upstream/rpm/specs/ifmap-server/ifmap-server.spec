@@ -1,4 +1,6 @@
-%define         _relstr 2contrail
+# 3contrail seems to be present in the cache for centos65 but spec file doesnt show it. Hence
+# using 4contrail. Make sure to update tho sequence if generating new rpm for ifmap-server
+%define         _relstr 4contrail
 Name:               ifmap-server 
 Version:            0.3.2 
 Release:            %{_relstr}%{?dist}
@@ -15,6 +17,7 @@ Patch2:		    003_ifmap_split_results.patch
 Patch3:		    004_ifmap_split_config.patch
 Patch4:             005_ifmap_centos_property.patch	
 Patch5:             006_ifmap_script_add.patch
+Patch6:             007_ifmap_script_change.patch
 BuildArch: noarch
 BuildRequires: log4j 
 BuildRequires: apache-commons-codec 
@@ -44,6 +47,7 @@ ls $RPM_BUILD_DIR/irond-0.3.2-src | xargs -n 1 -I'{}' mv $RPM_BUILD_DIR/irond-0.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 	
 %build
 pushd %{_builddir}/ifmap-server-0.3.2
