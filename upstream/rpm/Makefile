@@ -1,12 +1,19 @@
-MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
-#MOCK_CONFIG_LOCATION = epel-7-x86_64
+version=$(shell lsb_release -r | cut -f2 -d":" | cut -f1 -d".")
+print-%  : ; @echo $* = $($*)
+ifeq ($(strip $(version)), 6)
+   MOCK_CONFIG_LOCATION = epel-6-x86_64-contrail
+else
+   MOCK_CONFIG_LOCATION = epel-7-x86_64-contrail
+endif
 GIT_ROOT     := $(PWD)/../..
 BUILD_BASE          := $(GIT_ROOT)/..
 PREP = prep
 
 $(PREP):
-	if [ -d "/etc/mock" ]; then \
+	if [ -d "/etc/mock" ] && [ $(strip $(version)) -eq 6 ]; then \
 		sudo cp utils/epel-6-x86_64-contrail.cfg /etc/mock/; \
+        else \
+                sudo cp utils/epel-7-x86_64-contrail.cfg /etc/mock/; \
 	fi; \
 	mkdir -p $(BUILD_BASE)/BUILD
 
