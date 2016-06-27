@@ -23,7 +23,7 @@ ifmap-server: $(PREP)
 	spectool -g -R specs/ifmap-server/ifmap-server.spec -C specs/ifmap-server/
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/ifmap-server/ --spec specs/ifmap-server/ifmap-server.spec --resultdir=$(BUILD_BASE)/BUILD
-	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/ifmap-server*.src.rpm --resultdir $(BUILD_BASE)/BUILD 
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/ifmap-server*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/ifmap-server/irond-0.3.2-src.zip
 
 iproute2: $(PREP)
@@ -32,7 +32,7 @@ iproute2: $(PREP)
 	spectool -g -R specs/iproute2/iproute2.spec -C specs/iproute2/
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/iproute2/ --spec specs/iproute2/iproute2.spec --resultdir=$(BUILD_BASE)/BUILD
-	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/iproute*.src.rpm --resultdir $(BUILD_BASE)/BUILD 
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/iproute*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/iproute2/iproute2-*.tar.gz
 
 python-pycassa: $(PREP)
@@ -70,6 +70,15 @@ python-simplejson: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-simplejson/ --spec specs/python-simplejson/python-simplejson.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-simplejson*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-simplejson/simplejson*.tar.gz
+
+python-ujson: $(PREP)
+	@echo "About to make python-ujson"
+	#Fetch the source
+	spectool -g -R specs/python-ujson/python-ujson.spec -C specs/python-ujson/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-ujson/ --spec specs/python-ujson/python-ujson.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-ujson*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-ujson/ujson*.tar.gz
 
 python-lxml: $(PREP)
 	@echo "About to make python-lxml"
@@ -269,7 +278,7 @@ python-sseclient: $(PREP)
 
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
-	python-simplejson python-lxml python-bottle \
+	python-simplejson python-ujson python-lxml python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
