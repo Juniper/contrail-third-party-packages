@@ -40,7 +40,7 @@ docker-py-0.6.0:$(PREP)
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/docker-py-0.6.0.tar.gz)
 	(cd $(GIT_ROOT)/../build; cp docker-py-0.6.0.tar.gz docker-py_0.6.0.orig.tar.gz)
 	cp -Rf docker-py-0.6.0/debian $(GIT_ROOT)/../build/docker-py-0.6.0
-	#Build the docker-py from the BUILD dir	
+	#Build the docker-py from the BUILD dir
 	(cd $(GIT_ROOT)/../build/docker-py-0.6.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
 nova-docker-liberty: $(PREP)
@@ -198,8 +198,8 @@ horizon:$(PREP)
 	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/fix-dashboard-manage.patch)
 	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/ubuntu_settings.patch)
 	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/embedded-xstatic.patch)
-	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/add-juju-environment-download.patch)	
-	#Issue pdebuild command	
+	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; patch -p1 < debian/patches/add-juju-environment-download.patch)
+	#Issue pdebuild command
 	(cd $(GIT_ROOT)/../build/horizon-2014.2.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
 horizon-kilo:$(PREP)
@@ -257,13 +257,13 @@ horizon-liberty:$(PREP)
 python-cassandra:$(PREP)
 	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/c/cassandra-driver/cassandra-driver-3.0.0.tar.gz#md5=c853a91c63d3ca4e646c4a8ee2ebed05)
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/cassandra-driver-3.0.0.tar.gz)
-	# This depends on having extensions so do python build and clean 
+	# This depends on having extensions so do python build and clean
 	# Then prepare orig.tar.gz so that it does not complain abt upstream changes
 	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; python setup.py build)
 	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; python setup.py clean)
 	(cd $(GIT_ROOT)/../build/; tar -zcf cassandra-driver_3.0.0.orig.tar.gz cassandra-driver-3.0.0)
 	cp -Rf python-cassandra/debian $(GIT_ROOT)/../build/cassandra-driver-3.0.0
-	#Build the python-cassandra from the BUILD dir 
+	#Build the python-cassandra from the BUILD dir
 	(cd $(GIT_ROOT)/../build/cassandra-driver-3.0.0; pdebuild --use-pdebuild-internal --debbuildopts "-tc")
 
 python-sseclient:$(PREP)
@@ -278,10 +278,22 @@ python-sseclient:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/sseclient-0.0.11; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+python-ujson:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/16/c4/79f3409bc710559015464e5f49b9879430d8f87498ecdc335899732e5377/ujson-1.35.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf ujson-1.35.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-ujson/debian $(GIT_ROOT)/../build/ujson-1.35)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/ujson-1.35.tar.gz $(GIT_ROOT)/../build/ujson_1.35.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/ujson-1.35; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
-        nova-docker \
+	nova-docker \
 	expat \
 	kafka \
 	kafka_2.10 \
@@ -291,6 +303,7 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
-        horizon \
-        python-cassandra \
-        python-sseclient
+	horizon \
+	python-cassandra \
+	python-sseclient \
+	python-ujson
