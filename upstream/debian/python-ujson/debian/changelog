@@ -1,3 +1,9 @@
+ujson (1.35-0contrail0) trusty; urgency=low
+
+  * Debian package for python-ujson
+
+ -- Thuleau Edouard (PGP Key) <ethuleau@juniper.net> Thu, 30 Jun 2016 15:04:00 +0000
+
 ujson (1.35-1) unstable; urgency=medium
 
   [ Sandro Tosi ]

@@ -1,14 +1,13 @@
 %define name python-ujson
 %define version 1.35
 %define unmangled_version 1.35
-%define unmangled_version 1.35
 %define release 1
 %define _relstr 0contrail
 
 Summary: Ultra fast JSON encoder and decoder for Python
-Name:%{name}
+Name: %{name}
 Version: %{version}
-Release: %{release}.{_relstr}
+Release: %{release}.%{_relstr}
 Source0: https://pypi.python.org/packages/16/c4/79f3409bc710559015464e5f49b9879430d8f87498ecdc335899732e5377/ujson-1.35.tar.gz
 License: BSD License
 Group: Development/Libraries
