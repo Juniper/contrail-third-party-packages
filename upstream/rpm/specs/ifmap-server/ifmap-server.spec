@@ -16,9 +16,12 @@ Patch1:		    002_ifmap_0.3.2.patch
 Patch2:		    003_ifmap_split_results.patch
 Patch3:		    004_ifmap_split_config.patch
 Patch4:             005_ifmap_centos_property.patch	
-Patch5:             006_ifmap_script_add.patch
-Patch6:             007_ifmap_script_change.patch
-Patch7:             008_manifest_mf.patch
+Patch5:             005_ifmap_fix_utf_8_encoded_xml.patch
+Patch6:             006_poll_results_buffer.patch
+Patch7:             007_ifmap_leak_fixes.patch
+Patch8:             008_ifmap_script_add.patch
+Patch9:             009_ifmap_script_change.patch
+Patch10:            010_manifest_mf.patch
 BuildArch: noarch
 BuildRequires: log4j 
 BuildRequires: apache-commons-codec 
@@ -50,6 +53,9 @@ ls $RPM_BUILD_DIR/irond-0.3.2-src | xargs -n 1 -I'{}' mv $RPM_BUILD_DIR/irond-0.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
 	
 %build
 pushd %{_builddir}/ifmap-server-0.3.2
