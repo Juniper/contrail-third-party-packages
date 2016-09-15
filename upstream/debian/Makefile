@@ -159,15 +159,15 @@ librdkafka:$(PREP)
 
 kafka-python:$(PREP)
 	#wget the file to GIT_ROOT
-	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-0.9.2.tar.gz)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-1.0.1.tar.gz)
 	#untar the file
-	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-0.9.2.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-1.0.1.tar.gz)
 	#Copy the debian from the repo to the untarred location
-	(cp -avr kafka-python-0.9.2/debian $(GIT_ROOT)/../build/kafka-python-0.9.2)
+	(cp -avr kafka-python-1.0.1/debian $(GIT_ROOT)/../build/kafka-python-1.0.1)
 	#Create the .orig file
-	(mv $(GIT_ROOT)/../build/kafka-python-0.9.2.tar.gz $(GIT_ROOT)/../build/python-kafka-python_0.9.2.orig.tar.gz)
+	(mv $(GIT_ROOT)/../build/kafka-python-1.0.1.tar.gz $(GIT_ROOT)/../build/python-kafka_1.0.1.orig.tar.gz)
 	#Issue pdebuild inside the source
-	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+	(cd $(GIT_ROOT)/../build/kafka-python-1.0.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
 horizon:$(PREP)
 	#Update the pbuilder with canonical cloud repo and update it
