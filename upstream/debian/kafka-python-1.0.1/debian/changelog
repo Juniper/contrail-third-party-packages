@@ -1,0 +1,5 @@
+python-kafka (1.0.1-0contrail1) trusty; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Arvind Viswanathan (New pgp key) <arvindv@juniper.net>  Mon, 29 Feb 2016 15:27:57 +0000
