@@ -212,11 +212,11 @@ librdkafka: $(PREP)
 kafka-python: $(PREP)
 	@echo "About to make kafka-python"
 	#Fetch the source
-	spectool -g -R specs/kafka-python/kafka-python.spec -C specs/kafka-python/
+	spectool -g -R specs/python-kafka/python-kafka.spec -C specs/python-kafka/
 	#mock instructions
-	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka-python/ --spec specs/kafka-python/kafka-python.spec --resultdir=$(BUILD_BASE)/BUILD
-	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kafka-python*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/kafka-python/kafka-python*.tar.gz
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-kafka/ --spec specs/python-kafka/python-kafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-kafka/python-kafka*.tar.gz
 
 python-kazoo-1.3.1: $(PREP)
 	@echo "About to make python-kazoo-1.3.1"
