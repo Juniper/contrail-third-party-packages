@@ -290,6 +290,18 @@ python-ujson:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/ujson-1.35; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+python-pydbus:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://github.com/meghb/pydbus/archive/greenglib-dev.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf greenglib-dev.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pydbus/debian $(GIT_ROOT)/../build/pydbus-greenglib-dev)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/greenglib-dev.tar.gz $(GIT_ROOT)/../build/pydbus_0.7.0.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pydbus-greenglib-dev; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -306,4 +318,5 @@ all:$(PREP) \
 	horizon \
 	python-cassandra \
 	python-sseclient \
+	python-pydbus \
 	python-ujson
