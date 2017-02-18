@@ -290,6 +290,14 @@ python-ujson:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/ujson-1.35; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+geventhttpclient-1.3.1:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/35/41/33b552d780c1fef6427cbb314a69e8303a59e51b6aac25e07ded46aef6fa/geventhttpclient-1.3.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/geventhttpclient-1.3.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; cp geventhttpclient-1.3.1.tar.gz python-geventhttpclient_1.3.1.orig.tar.gz)
+	cp -Rf geventhttpclient-1.3.1/debian $(GIT_ROOT)/../build/geventhttpclient-1.3.1
+	#Build the docker-py from the BUILD dir
+	(cd $(GIT_ROOT)/../build/geventhttpclient-1.3.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 python-pydbus:$(PREP)
 	#wget the file to GIT_ROOT
 	(cd $(GIT_ROOT)/../build; wget https://github.com/meghb/pydbus/archive/greenglib-dev.tar.gz)
@@ -307,6 +315,7 @@ all:$(PREP) \
 	docker-py \
 	nova-docker \
 	expat \
+  geventhttpclient-1.3.1\
 	kafka \
 	kafka_2.10 \
 	kazoo \
