@@ -125,6 +125,15 @@ python-bitarray: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-bitarray*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-bitarray/bitarray*.tar.gz
 
+python-bitstring: $(PREP)
+	@echo "About to make python-bitstring"
+	#Fetch the source
+	spectool -g -R specs/python-bitstring/python-bitstring.spec -C specs/python-bitstring/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-bitstring/ --spec specs/python-bitstring/python-bitstring.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-bitstring*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-bitstring/bitstring*.zip
+
 python-thrift: $(PREP)
 	@echo "About to make python-thrift"
 	#Fetch the source
@@ -283,4 +292,5 @@ all:$(PREP) \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient
+	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient \
+	python-bitstring
