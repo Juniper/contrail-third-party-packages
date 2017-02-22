@@ -1,10 +1,10 @@
-%define name bitstring
+%define src_name bitstring
 %define version 3.1.5
 %define unmangled_version 3.1.5
 %define release 1
 %define _relstr 0contrail0
 Summary: Simple construction, analysis and modification of binary data.
-Name: python-%{name}
+Name: python-%{src_name}
 Version: %{version}
 Release: %{release}.%{_relstr}
 Source0: https://pypi.python.org/packages/f3/e5/dfe4c49c93d174a5fd807ed307d3a3f38c6b3e140972945f81a5f5578ca7/bitstring-3.1.5.zip
@@ -92,8 +92,7 @@ The bitstring module has been released as open source under the MIT License. Cop
 For more information see the project's homepage on GitHub: <https://github.com/scott-griffiths/bitstring>
 
 %prep
-
-%setup -n %{name}-%{unmangled_version}
+%setup -n %{src_name}-%{unmangled_version}
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
