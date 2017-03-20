@@ -310,6 +310,16 @@ python-pydbus:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/pydbus-greenglib-dev; pdebuild --use-pdebuild-internal --debbuildopts -tc)
 
+librdkafka-0.9.4:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://github.com/edenhill/librdkafka/archive/v0.9.4.zip --no-check-certificate)
+	#unzip the file and create a orig.tar.gz
+	(cd $(GIT_ROOT)/../build;unzip v0.9.4.zip;tar -zcvf librdkafka_0.9.4.orig.tar.gz librdkafka-0.9.4)
+	#copy the debian from the repo to the tarred location
+	(cp -avr librdkafka-0.9.4/debian $(GIT_ROOT)/../build/librdkafka-0.9.4)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/librdkafka-0.9.4; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
@@ -328,4 +338,5 @@ all:$(PREP) \
 	python-cassandra \
 	python-sseclient \
 	python-pydbus \
-	python-ujson
+	python-ujson \
+        librdkafka-0.9.4
