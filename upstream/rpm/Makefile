@@ -276,6 +276,16 @@ python-sseclient: $(PREP)
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-sseclient*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-sseclient/sseclient*.tar.gz
 
+librdkafka-0.9.4: $(PREP)
+	@echo "Abt to make librdkafka"
+	#Fetch the source
+	(cd specs/librdkafka-0.9.4/; wget https://github.com/edenhill/librdkafka/archive/v0.9.4.zip --no-check-certificate)
+	#mock instructions
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/librdkafka-0.9.4/ --spec specs/librdkafka-0.9.4/librdkafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/librdkafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/librdkafka-0.9.4/0.9.4.zip
+	rm -rf specs/librdkafka-0.9.4/librdkafka-0.9.4
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-ujson python-lxml python-bottle \
@@ -283,4 +293,5 @@ all:$(PREP) \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient
+	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient \
+	librdkafka-0.9.4
