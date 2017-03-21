@@ -290,11 +290,42 @@ python-ujson:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/ujson-1.35; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+geventhttpclient-1.3.1:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/35/41/33b552d780c1fef6427cbb314a69e8303a59e51b6aac25e07ded46aef6fa/geventhttpclient-1.3.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/geventhttpclient-1.3.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; cp geventhttpclient-1.3.1.tar.gz python-geventhttpclient_1.3.1.orig.tar.gz)
+	cp -Rf geventhttpclient-1.3.1/debian $(GIT_ROOT)/../build/geventhttpclient-1.3.1
+	#Build the docker-py from the BUILD dir
+	(cd $(GIT_ROOT)/../build/geventhttpclient-1.3.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+python-pydbus:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://github.com/meghb/pydbus/archive/greenglib-dev.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf greenglib-dev.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pydbus/debian $(GIT_ROOT)/../build/pydbus-greenglib-dev)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/greenglib-dev.tar.gz $(GIT_ROOT)/../build/pydbus_0.7.0.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pydbus-greenglib-dev; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+librdkafka-0.9.4:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://github.com/edenhill/librdkafka/archive/v0.9.4.zip --no-check-certificate)
+	#unzip the file and create a orig.tar.gz
+	(cd $(GIT_ROOT)/../build;unzip v0.9.4.zip;tar -zcvf librdkafka_0.9.4.orig.tar.gz librdkafka-0.9.4)
+	#copy the debian from the repo to the tarred location
+	(cp -avr librdkafka-0.9.4/debian $(GIT_ROOT)/../build/librdkafka-0.9.4)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/librdkafka-0.9.4; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
 	nova-docker \
 	expat \
+  geventhttpclient-1.3.1\
 	kafka \
 	kafka_2.10 \
 	kazoo \
@@ -306,4 +337,6 @@ all:$(PREP) \
 	horizon \
 	python-cassandra \
 	python-sseclient \
-	python-ujson
+	python-pydbus \
+	python-ujson \
+        librdkafka-0.9.4

@@ -1,0 +1,20 @@
+Source: python-geventhttpclient
+Section: python
+Priority: optional
+Maintainer: Amudha R <amudha@juniper.net>
+Build-Depends: debhelper (>=9),dh-python,python-all (>= 2.6.6-3~),python-setuptools,python3-all,python3-setuptools,python-dev
+Standards-Version: 3.9.6
+Homepage: https://github.com/gwik/geventhttpclient
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.2
+#Vcs-Git: git://anonscm.debian.org/collab-maint/geventhttpclient.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/geventhttpclient.git
+
+Package: python-geventhttpclient
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, python-six, python-certifi, python-gevent
+Suggests: python-geventhttpclient-doc
+Description: <insert up to 60 chars description> (Python 2)
+ <insert long description, indented with spaces>
+ .
+ This package installs the library for Python 2.

@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE = 1
+
+export PYBUILD_NAME=pydbus
+
+%:
+	dh $@ --with python2,python3 --buildsystem=pybuild
+
+
+override_dh_auto_test:
+	PYBUILD_SYSTEM=custom \
+	PYBUILD_TEST_ARGS="debian/tests/run_tests.sh {interpreter}" \
+	dh_auto_test
+
+override_dh_installdocs:
+	rst2html --report="error" README.rst README.html
+	rst2html doc/tutorial.rst doc/tutorial.html
+	dh_installdocs
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf pydbus.egg-info
+	rm -f README.html
+	rm -f doc/tutorial.html
