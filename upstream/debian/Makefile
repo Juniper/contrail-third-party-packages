@@ -254,6 +254,33 @@ horizon-liberty:$(PREP)
 	#Issue pdebuild command
 	(cd $(GIT_ROOT)/../build/horizon-8.0.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+horizon-newton:$(PREP)
+	#Update the pbuilder with canonical cloud repo and update it
+	#.pbuilderrc-cloud contains trusty repository for precise we may have to add
+	sudo cp utils/.pbuilderrc-cloud ~/.pbuilderrc; \
+	#Put a script in hooks dir of pbuilder to export the gpg keys of the repo
+	#the keyring is for canonical trusty. It may change for precise
+	if [ ! -d "/var/cache/pbuilder/hook.d" ]; then \
+	sudo mkdir /var/cache/pbuilder/hook.d; \
+	sudo cp utils/E01cacnonical-keyring /var/cache/pbuilder/hook.d/; \
+	sudo chmod a+x /var/cache/pbuilder/hook.d/E01cacnonical-keyring;	\
+	fi; \
+	#Update the pbuilder with these changes
+	sudo pbuilder --update --override-config --distribution xenial
+	#Get the horizon source and the orig file
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/~openstack-ubuntu-testing/+archive/ubuntu/newton/+files/horizon_10.0.2.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/~openstack-ubuntu-testing/+archive/ubuntu/newton/+files/horizon_10.0.2.orig-xstatic.tar.gz)
+	#untar the contents
+	(cd $(GIT_ROOT)/../build;tar -zxvf horizon_10.0.2.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build;tar -zxvf horizon_10.0.2.orig-xstatic.tar.gz)
+	#Move the xstatic folder inside the horizon
+	(cd $(GIT_ROOT)/../build;mv xstatic horizon-10.0.2/)
+	#copy the horizon/debian folder to the build dir
+	(cp -avr horizon_10.0.2/debian $(GIT_ROOT)/../build/horizon-10.0.2/)
+	#Issue pdebuild command
+	(cd $(GIT_ROOT)/../build/horizon-10.0.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+	#(cd $(GIT_ROOT)/../build/horizon-10.0.2; fakeroot debian/rules binary )
+
 python-cassandra:$(PREP)
 	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/c/cassandra-driver/cassandra-driver-3.0.0.tar.gz#md5=c853a91c63d3ca4e646c4a8ee2ebed05)
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/cassandra-driver-3.0.0.tar.gz)
