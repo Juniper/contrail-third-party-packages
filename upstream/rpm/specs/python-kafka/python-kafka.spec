@@ -1,15 +1,15 @@
 %define src_name kafka
-%define version 1.0.1
-%define unmangled_version 1.0.1
-%define unmangled_version 1.0.1
-%define release 0contrail1 
-%define _relstr 0contrail1
+%define version 1.0.2
+%define unmangled_version 1.0.2
+%define unmangled_version 1.0.2
+%define release 0contrail0 
+%define _relstr 0contrail0
 
 Summary: Pure Python client for Apache Kafka
 Name: python-%{src_name}
 Version: %{version}
 Release: %{release}%{?dist}
-Source0: https://pypi.python.org/packages/74/bc/2fffabf1f81d3f38ad125a67ff1fbb0a262af561557502bfa3fdf98bff47/%{src_name}-%{unmangled_version}.tar.gz
+Source0: https://pypi.python.org/packages/e9/9c/474a22499b1030e3a0d17cbe03b05a53dcbd019884a44d92831e4f3e27d4/%{src_name}-python-%{unmangled_version}.tar.gz
 License: Apache License 2.0
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{src_name}-%{version}-%{release}-buildroot
