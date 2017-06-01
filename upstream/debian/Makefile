@@ -169,6 +169,18 @@ kafka-python:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/kafka-python-1.0.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+kafka-python-1-0-2:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-1.0.2.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-1.0.2.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr kafka-python-1.0.2/debian $(GIT_ROOT)/../build/kafka-python-1.0.2)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/kafka-python-1.0.2.tar.gz $(GIT_ROOT)/../build/python-kafka_1.0.2.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/kafka-python-1.0.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
 horizon:$(PREP)
 	#Update the pbuilder with canonical cloud repo and update it
 	#.pbuilderrc-cloud contains trusty repository for precise we may have to add
@@ -361,6 +373,7 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
+        kafka-python-1-0-2 \
 	horizon \
 	python-cassandra \
 	python-sseclient \
