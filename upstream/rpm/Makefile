@@ -285,6 +285,21 @@ python-sseclient: $(PREP)
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-sseclient*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-sseclient/sseclient*.tar.gz
 
+cassandra-3.10: $(PREP)
+	@echo "About to make cassandra-3.10"
+	#HEre cassandra-src.tgz is built as per https://github.com/apache/cassandra/tree/cassandra-3.10/redhat and then copied to SPECS/cassandra-3.10
+	#Mock instructions
+	# Copy the java1.8 sdk rpm and place it in specs/cassandra-3.10
+	if [ -f specs/cassandra-3.10/jdk-8u131-linux-x64.rpm ] ; \
+	then \
+		echo "Exists" ; \
+		/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --install specs/cassandra-3.10/jdk-8u131-linux-x64.rpm ; \
+		/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --no-clean --chroot echo 3 | sudo update-alternatives --config java ; \
+		/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --no-clean $(BUILD_BASE)/BUILD/cassandra*.src.rpm --resultdir $(BUILD_BASE)/BUILD ; \
+	else \
+		echo "Not exists. download the jdk 1.8 rpm and put it in specs/cassandra-3.10/" ; \
+	fi;
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-ujson python-lxml python-bottle \
@@ -293,4 +308,4 @@ all:$(PREP) \
 	xmltodict libvirt docker-py kafka librdkafka \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
 	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient \
-	python-bitstring
+	python-bitstring cassandra-3.10
