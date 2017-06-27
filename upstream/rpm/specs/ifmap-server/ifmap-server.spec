@@ -1,6 +1,6 @@
 # 3contrail seems to be present in the cache for centos65 but spec file doesnt show it. Hence
 # using 4contrail. Make sure to update tho sequence if generating new rpm for ifmap-server
-%define         _relstr 5contrail
+%define         _relstr 6contrail
 Name:               ifmap-server 
 Version:            0.3.2 
 Release:            %{_relstr}%{?dist}
@@ -22,6 +22,7 @@ Patch7:             007_ifmap_leak_fixes.patch
 Patch8:             008_ifmap_script_add.patch
 Patch9:             009_ifmap_script_change.patch
 Patch10:            010_manifest_mf.patch
+Patch11:            011_ifmap_bug_1688227.patch
 BuildArch: noarch
 BuildRequires: log4j 
 BuildRequires: apache-commons-codec 
