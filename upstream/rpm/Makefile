@@ -299,6 +299,7 @@ cassandra-3.10: $(PREP)
 	else \
 		echo "Not exists. download the jdk 1.8 rpm and put it in specs/cassandra-3.10/" ; \
 	fi;
+
 python-pyang: $(PREP)
 	@echo "About to make python-pyang"
 	#Fetch the source
