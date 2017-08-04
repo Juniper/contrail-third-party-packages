@@ -324,6 +324,6 @@ all:$(PREP) \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
-  kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
+        kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
 	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind
