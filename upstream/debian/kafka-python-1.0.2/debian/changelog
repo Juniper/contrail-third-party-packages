@@ -1,0 +1,5 @@
+python-kafka (1.0.2-0contrail0) trusty; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Zhiqiang Cui (New pgp key) <zcui@juniper.net>  Thu, 1 June 2017 00:27:57 +0000

@@ -358,7 +358,7 @@ librdkafka-0.9.4:$(PREP)
 	(cp -avr librdkafka-0.9.4/debian $(GIT_ROOT)/../build/librdkafka-0.9.4)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/librdkafka-0.9.4; pdebuild --use-pdebuild-internal --debbuildopts -tc)
-
+  
 python-pyang:$(PREP)
 	#wget the file to GIT_ROOT
 	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/13/92/0ed160b635fad258124690ca2b27c5f635e5ce6d2bcdf3f0100ea5b5d8de/pyang-1.7.3.tar.gz#md5=d67c670d522d91101969b0631963eaa1)
@@ -397,12 +397,12 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
-        kafka-python-1-0-2 \
+  kafka-python-1-0-2 \
 	horizon \
 	python-cassandra \
 	python-sseclient \
 	python-pydbus \
 	python-ujson \
-        librdkafka-0.9.4 \
-        python-pyang \
-        python-pyangbind
+  librdkafka-0.9.4 \
+  python-pyang \
+  python-pyangbind
