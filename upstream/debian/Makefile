@@ -388,7 +388,7 @@ all:$(PREP) \
 	docker-py \
 	nova-docker \
 	expat \
-  geventhttpclient-1.3.1\
+  	geventhttpclient-1.3.1\
 	kafka \
 	kafka_2.10 \
 	kazoo \
@@ -397,12 +397,12 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
-  kafka-python-1-0-2 \
+  	kafka-python-1-0-2 \
 	horizon \
 	python-cassandra \
 	python-sseclient \
 	python-pydbus \
 	python-ujson \
-  librdkafka-0.9.4 \
-  python-pyang \
-  python-pyangbind
+  	librdkafka-0.9.4 \
+  	python-pyang \
+  	python-pyangbind
