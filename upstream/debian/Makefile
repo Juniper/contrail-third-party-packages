@@ -159,15 +159,27 @@ librdkafka:$(PREP)
 
 kafka-python:$(PREP)
 	#wget the file to GIT_ROOT
-	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-0.9.2.tar.gz)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-1.0.1.tar.gz)
 	#untar the file
-	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-0.9.2.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-1.0.1.tar.gz)
 	#Copy the debian from the repo to the untarred location
-	(cp -avr kafka-python-0.9.2/debian $(GIT_ROOT)/../build/kafka-python-0.9.2)
+	(cp -avr kafka-python-1.0.1/debian $(GIT_ROOT)/../build/kafka-python-1.0.1)
 	#Create the .orig file
-	(mv $(GIT_ROOT)/../build/kafka-python-0.9.2.tar.gz $(GIT_ROOT)/../build/python-kafka-python_0.9.2.orig.tar.gz)
+	(mv $(GIT_ROOT)/../build/kafka-python-1.0.1.tar.gz $(GIT_ROOT)/../build/python-kafka_1.0.1.orig.tar.gz)
 	#Issue pdebuild inside the source
-	(cd $(GIT_ROOT)/../build/kafka-python-0.9.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+	(cd $(GIT_ROOT)/../build/kafka-python-1.0.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
+kafka-python-1-0-2:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/k/kafka-python/kafka-python-1.0.2.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf kafka-python-1.0.2.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr kafka-python-1.0.2/debian $(GIT_ROOT)/../build/kafka-python-1.0.2)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/kafka-python-1.0.2.tar.gz $(GIT_ROOT)/../build/python-kafka_1.0.2.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/kafka-python-1.0.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
 horizon:$(PREP)
 	#Update the pbuilder with canonical cloud repo and update it
@@ -254,6 +266,33 @@ horizon-liberty:$(PREP)
 	#Issue pdebuild command
 	(cd $(GIT_ROOT)/../build/horizon-8.0.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+horizon-newton:$(PREP)
+	#Update the pbuilder with canonical cloud repo and update it
+	#.pbuilderrc-cloud contains trusty repository for precise we may have to add
+	sudo cp utils/.pbuilderrc-cloud ~/.pbuilderrc; \
+	#Put a script in hooks dir of pbuilder to export the gpg keys of the repo
+	#the keyring is for canonical trusty. It may change for precise
+	if [ ! -d "/var/cache/pbuilder/hook.d" ]; then \
+	sudo mkdir /var/cache/pbuilder/hook.d; \
+	sudo cp utils/E01cacnonical-keyring /var/cache/pbuilder/hook.d/; \
+	sudo chmod a+x /var/cache/pbuilder/hook.d/E01cacnonical-keyring;	\
+	fi; \
+	#Update the pbuilder with these changes
+	sudo pbuilder --update --override-config --distribution xenial
+	#Get the horizon source and the orig file
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/~openstack-ubuntu-testing/+archive/ubuntu/newton/+files/horizon_10.0.2.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build; wget https://launchpad.net/~openstack-ubuntu-testing/+archive/ubuntu/newton/+files/horizon_10.0.2.orig-xstatic.tar.gz)
+	#untar the contents
+	(cd $(GIT_ROOT)/../build;tar -zxvf horizon_10.0.2.orig.tar.gz)
+	(cd $(GIT_ROOT)/../build;tar -zxvf horizon_10.0.2.orig-xstatic.tar.gz)
+	#Move the xstatic folder inside the horizon
+	(cd $(GIT_ROOT)/../build;mv xstatic horizon-10.0.2/)
+	#copy the horizon/debian folder to the build dir
+	(cp -avr horizon_10.0.2/debian $(GIT_ROOT)/../build/horizon-10.0.2/)
+	#Issue pdebuild command
+	(cd $(GIT_ROOT)/../build/horizon-10.0.2; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+	#(cd $(GIT_ROOT)/../build/horizon-10.0.2; fakeroot debian/rules binary )
+
 python-cassandra:$(PREP)
 	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/source/c/cassandra-driver/cassandra-driver-3.0.0.tar.gz#md5=c853a91c63d3ca4e646c4a8ee2ebed05)
 	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/cassandra-driver-3.0.0.tar.gz)
@@ -290,11 +329,66 @@ python-ujson:$(PREP)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/ujson-1.35; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
+geventhttpclient-1.3.1:$(PREP)
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/35/41/33b552d780c1fef6427cbb314a69e8303a59e51b6aac25e07ded46aef6fa/geventhttpclient-1.3.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; tar -xvzf $(GIT_ROOT)/../build/geventhttpclient-1.3.1.tar.gz)
+	(cd $(GIT_ROOT)/../build; cp geventhttpclient-1.3.1.tar.gz python-geventhttpclient_1.3.1.orig.tar.gz)
+	cp -Rf geventhttpclient-1.3.1/debian $(GIT_ROOT)/../build/geventhttpclient-1.3.1
+	#Build the docker-py from the BUILD dir
+	(cd $(GIT_ROOT)/../build/geventhttpclient-1.3.1; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+python-pydbus:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://github.com/meghb/pydbus/archive/greenglib-dev.tar.gz)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf greenglib-dev.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pydbus/debian $(GIT_ROOT)/../build/pydbus-greenglib-dev)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/greenglib-dev.tar.gz $(GIT_ROOT)/../build/pydbus_0.7.0.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pydbus-greenglib-dev; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+librdkafka-0.9.4:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://github.com/edenhill/librdkafka/archive/v0.9.4.zip --no-check-certificate)
+	#unzip the file and create a orig.tar.gz
+	(cd $(GIT_ROOT)/../build;unzip v0.9.4.zip;tar -zcvf librdkafka_0.9.4.orig.tar.gz librdkafka-0.9.4)
+	#copy the debian from the repo to the tarred location
+	(cp -avr librdkafka-0.9.4/debian $(GIT_ROOT)/../build/librdkafka-0.9.4)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/librdkafka-0.9.4; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+
+python-pyang:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/13/92/0ed160b635fad258124690ca2b27c5f635e5ce6d2bcdf3f0100ea5b5d8de/pyang-1.7.3.tar.gz#md5=d67c670d522d91101969b0631963eaa1)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf pyang-1.7.3.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pyang/debian $(GIT_ROOT)/../build/pyang-1.7.3)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/pyang-1.7.3.tar.gz $(GIT_ROOT)/../build/pyang_1.7.3.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pyang-1.7.3; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
+python-pyangbind:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://testpypi.python.org/packages/1e/75/1670067122a39440012f2965a4b8b6f6ea52021ff5a7403ae8afd74c57e8/pyangbind-0.2.0.tar.gz#md5=646a2da65a1d40df2cf141fe5b6db7b4)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf pyangbind-0.2.0.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pyangbind/debian $(GIT_ROOT)/../build/pyangbind-0.2.0)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/pyangbind-0.2.0.tar.gz $(GIT_ROOT)/../build/pyangbind_0.2.0.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pyangbind-0.2.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
 	docker-py \
 	nova-docker \
 	expat \
+  geventhttpclient-1.3.1\
 	kafka \
 	kafka_2.10 \
 	kazoo \
@@ -303,7 +397,12 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
+        kafka-python-1-0-2 \
 	horizon \
 	python-cassandra \
 	python-sseclient \
-	python-ujson
+	python-pydbus \
+	python-ujson \
+        librdkafka-0.9.4 \
+        python-pyang \
+        python-pyangbind
