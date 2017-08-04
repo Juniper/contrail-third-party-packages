@@ -358,6 +358,30 @@ librdkafka-0.9.4:$(PREP)
 	(cp -avr librdkafka-0.9.4/debian $(GIT_ROOT)/../build/librdkafka-0.9.4)
 	#Issue pdebuild inside the source
 	(cd $(GIT_ROOT)/../build/librdkafka-0.9.4; pdebuild --use-pdebuild-internal --debbuildopts -tc)
+  
+python-pyang:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://pypi.python.org/packages/13/92/0ed160b635fad258124690ca2b27c5f635e5ce6d2bcdf3f0100ea5b5d8de/pyang-1.7.3.tar.gz#md5=d67c670d522d91101969b0631963eaa1)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf pyang-1.7.3.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pyang/debian $(GIT_ROOT)/../build/pyang-1.7.3)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/pyang-1.7.3.tar.gz $(GIT_ROOT)/../build/pyang_1.7.3.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pyang-1.7.3; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
+
+python-pyangbind:$(PREP)
+	#wget the file to GIT_ROOT
+	(cd $(GIT_ROOT)/../build; wget https://testpypi.python.org/packages/1e/75/1670067122a39440012f2965a4b8b6f6ea52021ff5a7403ae8afd74c57e8/pyangbind-0.2.0.tar.gz#md5=646a2da65a1d40df2cf141fe5b6db7b4)
+	#untar the file
+	(cd $(GIT_ROOT)/../build; tar -zxvf pyangbind-0.2.0.tar.gz)
+	#Copy the debian from the repo to the untarred location
+	(cp -avr python-pyangbind/debian $(GIT_ROOT)/../build/pyangbind-0.2.0)
+	#Create the .orig file
+	(mv $(GIT_ROOT)/../build/pyangbind-0.2.0.tar.gz $(GIT_ROOT)/../build/pyangbind_0.2.0.orig.tar.gz)
+	#Issue pdebuild inside the source
+	(cd $(GIT_ROOT)/../build/pyangbind-0.2.0; sudo pdebuild --use-pdebuild-internal --debbuildopts -tc )
 
 # Pls keep sorted (reduce merge issues)
 all:$(PREP) \
@@ -373,10 +397,12 @@ all:$(PREP) \
 	librdkafka \
 	lxml \
 	kafka-python \
-        kafka-python-1-0-2 \
+  kafka-python-1-0-2 \
 	horizon \
 	python-cassandra \
 	python-sseclient \
 	python-pydbus \
 	python-ujson \
-        librdkafka-0.9.4
+  librdkafka-0.9.4 \
+  python-pyang \
+  python-pyangbind
