@@ -125,6 +125,15 @@ python-bitarray: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-bitarray*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-bitarray/bitarray*.tar.gz
 
+python-bitstring: $(PREP)
+	@echo "About to make python-bitstring"
+	#Fetch the source
+	spectool -g -R specs/python-bitstring/python-bitstring.spec -C specs/python-bitstring/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-bitstring/ --spec specs/python-bitstring/python-bitstring.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-bitstring*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-bitstring/bitstring*.zip
+
 python-thrift: $(PREP)
 	@echo "About to make python-thrift"
 	#Fetch the source
@@ -212,11 +221,11 @@ librdkafka: $(PREP)
 kafka-python: $(PREP)
 	@echo "About to make kafka-python"
 	#Fetch the source
-	spectool -g -R specs/kafka-python/kafka-python.spec -C specs/kafka-python/
+	spectool -g -R specs/python-kafka/python-kafka.spec -C specs/python-kafka/
 	#mock instructions
-	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka-python/ --spec specs/kafka-python/kafka-python.spec --resultdir=$(BUILD_BASE)/BUILD
-	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kafka-python*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/kafka-python/kafka-python*.tar.gz
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-kafka/ --spec specs/python-kafka/python-kafka.spec --resultdir=$(BUILD_BASE)/BUILD
+	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-kafka/python-kafka*.tar.gz
 
 python-kazoo-1.3.1: $(PREP)
 	@echo "About to make python-kazoo-1.3.1"
@@ -276,6 +285,38 @@ python-sseclient: $(PREP)
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-sseclient*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-sseclient/sseclient*.tar.gz
 
+cassandra-3.10: $(PREP)
+	@echo "About to make cassandra-3.10"
+	#HEre cassandra-src.tgz is built as per https://github.com/apache/cassandra/tree/cassandra-3.10/redhat and then copied to SPECS/cassandra-3.10
+	#Mock instructions
+	# Copy the java1.8 sdk rpm and place it in specs/cassandra-3.10
+	if [ -f specs/cassandra-3.10/jdk-8u131-linux-x64.rpm ] ; \
+	then \
+		echo "Exists" ; \
+		/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --install specs/cassandra-3.10/jdk-8u131-linux-x64.rpm ; \
+		/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --no-clean --chroot echo 3 | sudo update-alternatives --config java ; \
+		/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --no-clean $(BUILD_BASE)/BUILD/cassandra*.src.rpm --resultdir $(BUILD_BASE)/BUILD ; \
+	else \
+		echo "Not exists. download the jdk 1.8 rpm and put it in specs/cassandra-3.10/" ; \
+	fi;
+python-pyang: $(PREP)
+	@echo "About to make python-pyang"
+	#Fetch the source
+	spectool -g -R specs/python-pyang/python-pyang.spec -C specs/python-pyang/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-pyang/ --spec specs/python-pyang/python-pyang.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-pyang*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-pyang/pyang*.tar.gz
+
+python-pyangbind: $(PREP)
+	@echo "About to make python-pyangbind"
+	#Fetch the source
+	spectool -g -R specs/python-pyangbind/python-pyangbind.spec -C specs/python-pyangbind/
+	#mock instructions
+	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-pyangbind/ --spec specs/python-pyangbind/python-pyangbind.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-pyangbind*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-pyangbind/pyangbind*.tar.gz
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-ujson python-lxml python-bottle \
@@ -283,4 +324,5 @@ all:$(PREP) \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient
+	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient \
+	python-bitstring cassandra-3.10 python-pyang python-pyangbind
