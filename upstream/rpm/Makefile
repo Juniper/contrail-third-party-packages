@@ -269,7 +269,7 @@ librdkafka-0.9.0: $(PREP)
 zookeeper-3.4.8: $(PREP)
 	@echo "Abt to make zookeeper"
 	#Fetch the source
-	(cd specs/zookeeper/; wget http://mirror.cogentco.com/pub/apache/zookeeper/stable/zookeeper-3.4.8.tar.gz)
+	(cd specs/zookeeper/; wget http://archive.apache.org/dist/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz)
 	#mock instructions
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/zookeeper/ --spec specs/zookeeper/zookeeper.spec --resultdir=$(BUILD_BASE)/BUILD
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/zookeeper*.src.rpm --resultdir $(BUILD_BASE)/BUILD
