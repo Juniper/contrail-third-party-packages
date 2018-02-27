@@ -6,7 +6,7 @@
 
 #BuildRoot:	%{buildroot}
 Summary: 		libipfix package
-License: 		GPL
+License: 		LGPLv3+
 Name: 			%{name}
 Version: 		%{version}
 Release: 		%{release}%{?dist}
