@@ -1,0 +1,54 @@
+diff -ru jsonschema-2.5.1.orig/jsonschema/compat.py jsonschema-2.5.1/jsonschema/compat.py
+--- jsonschema-2.5.1.orig/jsonschema/compat.py	2015-04-13 17:23:46.000000000 +0200
++++ jsonschema-2.5.1/jsonschema/compat.py	2016-02-27 16:33:40.938583562 +0100
+@@ -9,6 +9,7 @@
+ 
+ PY3 = sys.version_info[0] >= 3
+ PY26 = sys.version_info[:2] == (2, 6)
++PY27 = sys.version_info[:2] == (2, 7)
+ 
+ if PY3:
+     zip = zip
+@@ -33,7 +34,7 @@
+     int_types = int, long
+     iteritems = operator.methodcaller("iteritems")
+ 
+-    if PY26:
++    if PY26 or PY27:
+         from repoze.lru import lru_cache
+     else:
+         from functools32 import lru_cache
+diff -ru jsonschema-2.5.1.orig/setup.py jsonschema-2.5.1/setup.py
+--- jsonschema-2.5.1.orig/setup.py	2015-06-08 18:04:36.000000000 +0200
++++ jsonschema-2.5.1/setup.py	2016-02-27 16:34:40.462446660 +0100
+@@ -1,6 +1,7 @@
+ import os
+ 
+ from setuptools import setup
++from jsonschema import _version
+ 
+ 
+ with open(os.path.join(os.path.dirname(__file__), "README.rst")) as readme:
+@@ -24,14 +25,14 @@
+ extras_require = {
+     "format" : ["rfc3987", "strict-rfc3339", "webcolors"],
+     ":python_version=='2.6'": ["argparse", "repoze.lru"],
+-    ":python_version=='2.7'": ["functools32"],
++    ":python_version=='2.7'": ["repoze.lru"],
+ }
+ 
+ setup(
+     name="jsonschema",
++    version=_version.__version__,
+     packages=["jsonschema", "jsonschema.tests"],
+     package_data={"jsonschema": ["schemas/*.json"]},
+-    setup_requires=["vcversioner"],
+     extras_require=extras_require,
+     author="Julian Berman",
+     author_email="Julian@GrayVines.com",
+@@ -41,5 +42,4 @@
+     long_description=long_description,
+     url="http://github.com/Julian/jsonschema",
+     entry_points={"console_scripts": ["jsonschema = jsonschema.cli:main"]},
+-    vcversioner={"version_module_paths" : ["jsonschema/_version.py"]},
+ )
