@@ -1,0 +1,32 @@
+ujson (1.35-0contrail0) trusty; urgency=low
+
+  * Debian package for python-ujson
+
+ -- Thuleau Edouard (PGP Key) <ethuleau@juniper.net> Thu, 30 Jun 2016 15:04:00 +0000
+
+ujson (1.35-1) unstable; urgency=medium
+
+  [ Sandro Tosi ]
+  * New upstream release: Closes: #792610, #827209
+  * debian/control
+    - set Vcs-* fields
+    - set team as uploaders
+    - bump Standards-Version to 3.9.8 (no changes needed)
+    - add six, pytz to b-d, needed by tests
+  * debian/copyright
+    - extend packaging copyright years
+    - updated upstream copyright years
+  * debian/patches/0002-run-test-more-verbosely.patch
+    - run tests more verbosely
+
+  [ Ondřej Nový ]
+  * Fixed homepage (https)
+  * Fixed VCS URL (https)
+
+ -- Sandro Tosi <morph@debian.org>  Tue, 14 Jun 2016 20:24:42 +0100
+
+ujson (1.33-1) unstable; urgency=low
+
+  * Initial release (Closes: #790447)
+
+ -- Sandro Tosi <morph@debian.org>  Mon, 29 Jun 2015 11:37:26 -0400

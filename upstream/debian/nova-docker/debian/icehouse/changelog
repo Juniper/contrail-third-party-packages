@@ -1,0 +1,29 @@
+nova-docker (0.0.0.post126-0contrail0) trusty; urgency=low
+
+  * Fix for the bug https://bugs.launchpad.net/nova-docker/+bug/1533037
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Fri, 13 May 2016 08:04:39 -0700
+
+nova-docker (0.0.0.post124-0contrail0) trusty; urgency=low
+
+   * Fix for thr bugs https://bugs.launchpad.net/juniperopenstack/+bug/1458655, 1458553
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Mon, 01 Jun 2015 10:14:40 -0700
+
+nova-docker (0.0.0.post122-0contrail0) trusty; urgency=low
+
+   * Fix for thr bugs https://bugs.launchpad.net/juniperopenstack/+bug/1452151, 1455616, 1455168, 1454655
+
+ -- Ignatious Johnson <ijohnson@juniper.net> Fri, 22 May 2015 12:53:08 -0700
+
+nova-docker (0.0.0.post118-0contrail0) trusty; urgency=low
+
+  * Fix bug - https://bugs.launchpad.net/juniperopenstack/+bug/1446929
+
+ -- Ignatious Johnson <ijohnson@juniper.net>  Wed, 29 Apr 2015 21:50:33 -0700
+
+nova-docker (0.0.0.post116-0contrail0) trusty; urgency=low
+
+  * Initial release - Nova docker package for icehouse release.
+
+ -- Ignatious Johnson <ijohnson@juniper.net>  Wed, 25 Feb 2015 13:52:24 -0800

@@ -1,0 +1,48 @@
+Source: ujson
+Section: python
+Priority: optional
+Maintainer: Sandro Tosi <morph@debian.org>
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), python-all-dev, python-all-dbg, python3-all-dev, python3-all-dbg, dh-python, python-six, python3-six, python-tz, python3-tz
+Standards-Version: 3.9.8
+Homepage: https://github.com/esnme/ultrajson
+Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/ujson.git
+Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/ujson.git
+
+Package: python-ujson
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, ${shlibs:Depends}
+Description: ultra fast JSON encoder and decoder for Python 2
+ UltraJSON is an ultra fast JSON encoder and decoder written in pure C with
+ bindings for Python.
+
+Package: python-ujson-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: python-dbg, ${misc:Depends}, ${shlibs:Depends}, python-ujson (= ${binary:Version})
+Description: ultra fast JSON encoder and decoder for Python 2 (debug ext)
+ UltraJSON is an ultra fast JSON encoder and decoder written in pure C with
+ bindings for Python.
+ .
+ This package contains the debug extension for python-ujson.
+
+Package: python3-ujson
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, ${shlibs:Depends}
+Description: ultra fast JSON encoder and decoder for Python 3
+ UltraJSON is an ultra fast JSON encoder and decoder written in pure C with
+ bindings for Python.
+ .
+ This package contains the Python 3 module of ujson.
+
+Package: python3-ujson-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: python3-dbg, ${misc:Depends}, ${shlibs:Depends}, python3-ujson (= ${binary:Version})
+Description: ultra fast JSON encoder and decoder for Python 3 (debug ext)
+ UltraJSON is an ultra fast JSON encoder and decoder written in pure C with
+ bindings for Python.
+ .
+ This package contains the debug extension for python3-ujson.

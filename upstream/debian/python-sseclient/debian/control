@@ -1,0 +1,15 @@
+Source: python-sseclient
+Section: python
+Priority: optional
+Maintainer: Sundaresan Rajangam <srajanga@juniper.net>
+Build-Depends: debhelper (>= 8.0.0), python-all (>= 2.6.6-3), python-setuptools (>= 0.6b3)
+Standards-Version: 3.9.4
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/python-sseclient.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/python-sseclient.git;a=summary
+
+Package: python-sseclient
+Architecture: any
+#Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

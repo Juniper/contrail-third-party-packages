@@ -1,0 +1,17 @@
+Source: libipfix
+Section: libs
+Priority: extra
+Maintainer: Sebastien Badia <seb@sebian.fr>
+Build-Depends: autotools-dev, debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://libipfix.sourceforge.net/
+Vcs-Git: git://anonscm.debian.org/collab-maint/libipfix.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/libipfix.git
+
+Package: libipfix
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: C-library implementing the IPFIX protocol
+ The libipfix is used to export and collect measurement data. Libipfix is a
+ C-library implementing the IPFIX protocol defined by the IP Flow Information
+ Export working group of the IETF.

@@ -1,0 +1,91 @@
+Description: Fix spelling error in ipfix_collector
+ This patch only fix typo about lenght/length.
+Author: Sebastien Badia <seb@sebian.fr>
+Forwarded: no
+Last-Update: 2014-12-09
+
+--- libipfix-110209.orig/lib/ipfix_col.c
++++ libipfix-110209/lib/ipfix_col.c
+@@ -803,7 +803,7 @@ int ipfix_decode_trecord( ipfixs_node_t
+     return -1;
+ 
+  ioerr:
+-    mlogf( 1, "[%s] invalid message lenght\n", func ); 
++    mlogf( 1, "[%s] invalid message length\n", func ); 
+     return -1;
+ }
+ 
+@@ -942,7 +942,7 @@ int ipfix_parse_msg( ipfix_input_t *inpu
+     ipfix_datarecord_t   data = { NULL, NULL, 0 };
+     ipfixe_node_t        *e;
+     uint8_t              *buf;                 /* ipfix payload */
+-    uint16_t             setid, setlen;        /* set id, set lenght */
++    uint16_t             setid, setlen;        /* set id, set length */
+     int                  i, nread, offset;     /* counter */
+     int                  bytes, bytesleft;
+     int                  err_flag = 0;
+@@ -1003,7 +1003,7 @@ int ipfix_parse_msg( ipfix_input_t *inpu
+             break;
+         }
+ 
+-        /** read ipfix record header (set id, lenght)
++        /** read ipfix record header (set id, length)
+          */
+         setid   = READ16(buf+nread);
+         setlen  = READ16(buf+nread+2);
+@@ -1130,7 +1130,7 @@ int ipfix_parse_raw_msg(ipfixs_node_t *s
+     ipfix_datarecord_t   data = { NULL, NULL, 0 };
+     ipfixe_node_t        *e;
+     uint8_t              *buf;                 /* ipfix payload */
+-    uint16_t             setid, setlen;        /* set id, set lenght */
++    uint16_t             setid, setlen;        /* set id, set length */
+     int                  i, nread, offset;     /* counter */
+     int                  bytes, bytesleft;
+     int                  err_flag = 0;
+@@ -1166,7 +1166,7 @@ int ipfix_parse_raw_msg(ipfixs_node_t *s
+             break;
+         }
+ 
+-        /** read ipfix record header (set id, lenght)
++        /** read ipfix record header (set id, length)
+          */
+         setid   = READ16(buf+nread);
+         setlen  = READ16(buf+nread+2);
+@@ -1333,7 +1333,7 @@ void process_client_tcp( int fd, int mas
+          */
+         for ( i=0; i<hdr.u.nf9.count; i++ )
+         {
+-            /** read ipfix record header (set id, lenght)
++            /** read ipfix record header (set id, length)
+              */
+             if ( space < 4 ) {
+                 mlogf( 1, "[%s] record%d: message too long!\n", func, i+1 );
+@@ -1706,7 +1706,7 @@ void process_client_ssl( int fd, int mas
+         /* read ipfix message, we have to parse the records to get all bytes
+          */
+         for ( i=0; i<hdr.u.nf9.count; i++ ) {
+-            /* read ipfix record header (set id, lenght)
++            /* read ipfix record header (set id, length)
+              */
+             if ( space < 4 ) {
+                 mlogf( 1, "[%s] record%d: message too long!\n", func, i+1 );
+@@ -1967,7 +1967,7 @@ int ipfix_get_template_ident( ipfix_temp
+     int           i, j, found;
+     int           min, last, cur_eno, next_eno, ft, eno;
+     char          *ident;
+-    size_t        len = t->nfields*10;  /* todo: calc real lenght! */
++    size_t        len = t->nfields*10;  /* todo: calc real length! */
+ 
+     /** alloc mem
+      */
+--- libipfix-110209.orig/lib/ipfix_db.c
++++ libipfix-110209/lib/ipfix_db.c
+@@ -326,7 +326,7 @@ int ipfix_db_get_tablename( MYSQL *mysql
+     int           i, j, found;
+     int           min, last, cur_eno, next_eno, ft, eno;
+     char          *ident;
+-    size_t        len = t->nfields*10;  /* todo: calc real lenght! */
++    size_t        len = t->nfields*10;  /* todo: calc real length! */
+     char          *func = "ipfix_db";
+ 
+     if ( tablenamelen > MAXTABLENAMELEN )

@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+export QUILT_PATCHES=debian/patches
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	./configure
+
+override_dh_auto_clean:
+	make clean
+	rm -rf out/*
+	rm -rf config.gypi config.mk
+
+override_dh_auto_build:
+	make
+
+override_dh_auto_test:
+
+PACKAGE = nodejs
+SRC_VERSION := $(shell dpkg-parsechangelog | sed -ne 's/^Version: \(\([0-9]\+\):\)\?\(.*\)-.*/\3/p')
+TARBALL = $(PACKAGE)_$(SRC_VERSION).orig.tar.gz
+get-orig-source:
+	rm -rf get-orig-source $(TARBALL)
+	mkdir get-orig-source
+	wget -q http://nodejs.org/dist/v$(SRC_VERSION)/node-v$(SRC_VERSION).tar.gz -O get-orig-source/node-$(SRC_VERSION).tar.gz
+	cd get-orig-source; tar xzf node-$(SRC_VERSION).tar.gz
+	GZIP=--best tar czf $(TARBALL) -C get-orig-source node-v$(SRC_VERSION)
+	mv $(PACKAGE)_$(SRC_VERSION).orig.tar.gz ../
+	cp -r get-orig-source/node-v$(SRC_VERSION)/* .
+	rm -rf get-orig-source
+	echo "../$(TARBALL) created"
+
+.PHONY: get-orig-source

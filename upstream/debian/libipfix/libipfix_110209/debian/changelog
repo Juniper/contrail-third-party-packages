@@ -1,0 +1,5 @@
+libipfix (110209-1) unstable; urgency=low
+
+  * Initial release (Closes: #772660)
+
+ -- Sebastien Badia <seb@sebian.fr>  Tue, 09 Dec 2014 18:46:23 +0100

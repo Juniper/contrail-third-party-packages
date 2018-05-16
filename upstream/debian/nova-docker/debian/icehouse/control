@@ -1,0 +1,20 @@
+Source: nova-docker
+Section: python
+Priority: optional
+Maintainer: Ignatious Johnson <ijohnson@juniper.net>
+Build-Depends: debhelper (>= 7),
+               python-pbr (>= 0.6),
+               python-setuptools (>= 0.6b3)
+Standards-Version: 3.9.4
+Homepage: https://wiki.openstack.org/wiki/Docker
+#Vcs-Git: git://git.debian.org/collab-maint/nova-docker.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/nova-docker.git;a=summary
+
+Package: nova-docker
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         nova-compute,
+         python-contrail-vrouter-api,
+         lxc-docker,
+Description: Docker driver for OpenStack Nova

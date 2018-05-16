@@ -1,0 +1,14 @@
+Source: python-bottle-cork
+Section: python
+Priority: optional
+Maintainer: Aneesh Bhansali <abhansali@juniper.net>
+Build-Depends: debhelper (>= 8.0.0), python-all, python-setuptools
+Standards-Version: 3.9.4
+Homepage: http://cork.firelet.net/
+#Vcs-Git: git://git.debian.org/collab-maint/python-bottle-cork.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/python-bottle-cork.git;a=summary
+
+Package: python-bottle-cork
+Architecture: any
+Depends: python:any (<< 2.8), python:any (>= 2.7),  python-bottle, python-beaker, python-crypto
+Description: Authentication library for Bottle

@@ -1,0 +1,20 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --buildsystem=python_distutils --with python2,sphinxdoc
+
+PYTHONS:=$(shell pyversions -vr)
+override_dh_auto_install:
+	set -e && for pyvers in $(PYTHONS); do \
+		python$$pyvers setup.py install --install-layout=deb \
+			--root $(CURDIR)/debian/python-kazoo ; \
+	done
+
+override_dh_installchangelogs:
+	dh_installchangelogs CHANGES.rst
+
+override_dh_sphinxdoc:
+ifeq (,$(findstring nodocs, $(DEB_BUILD_OPTIONS)))
+	sphinx-build -b html docs/ $(CURDIR)/debian/python-kazoo-doc/usr/share/doc/python-kazoo-doc/html
+	dh_sphinxdoc -O--buildsystem=python_distutils
+endif

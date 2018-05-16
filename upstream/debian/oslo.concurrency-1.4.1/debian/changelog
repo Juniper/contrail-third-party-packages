@@ -1,0 +1,10 @@
+python-oslo.concurrency (1.4.1-0contrail1) trusty; urgency=low
+  * Adding python-retrying as dependent package
+
+ -- Ignatious Johnson <ijohnson@juniper.net>  Sat, 06 Jun 2015 14:32:22 -0700
+
+python-oslo.concurrency (1.4.1-0contrail0) trusty; urgency=low
+
+  * Initial release without any changes.
+
+ -- Ignatious Johnson <ijohnson@juniper.net>  Tue, 14 Apr 2015 10:05:32 -0700

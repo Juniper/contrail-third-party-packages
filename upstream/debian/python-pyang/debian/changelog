@@ -1,0 +1,11 @@
+pyang (1.7.3-0contrail0) trusty; urgency=low
+
+  * Debian package for python-pyang
+
+ -- Sanju <sanjua@juniper.net>  Tue, 01 Aug 2017 23:00:26 +0000
+
+pyang (1.7.3-1) unstable; urgency=medium
+
+  * Initial release
+
+ -- Martin Bjorklund <mbj@tail-f.com> Tue, 01 Aug 2017 23:00:26 +0000

@@ -1,0 +1,15 @@
+Source: pyang
+Section: python
+Priority: optional
+Maintainer: Sanju <sanjua@juniper.net>
+Build-Depends: debhelper (>= 8.0.0), python (>= 2.6.6-3~), python-all-dev (>= 2.6.6-1~),  python-pyrex (>= 0.9.4.1), python-setuptools
+X-Python-Version: all
+Standards-Version: 3.9.5
+Homepage: https://github.com/mbj4668/pyang
+#Vcs-Git: git://git.debian.org/collab-maint/python-pyang.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/python-pyang.git;a=summary
+ 
+Package: python-pyang
+Architecture: any
+Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Description: Python binary to generate python mapping classes for openconfig yang models
