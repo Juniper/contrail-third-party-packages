@@ -44,15 +44,6 @@ python-pycassa: $(PREP)
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-pycassa*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-pycassa/pycassa-1.10.0.tar.gz
 
-python-kombu: $(PREP)
-	@echo "About to make python-kombu"
-	#Fetch the source
-	spectool -g -R specs/python-kombu/python-kombu.spec -C specs/python-kombu/
-	#mock instructions
-	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/python-kombu/ --spec specs/python-kombu/python-kombu.spec --resultdir=$(BUILD_BASE)/BUILD
-	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/python-kombu*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/python-kombu/python=kombu-1.4.1.tar.gz
-
 python-zope-interface: $(PREP)
 	@echo "About to make python-zope-interface"
 	#Fetch the source
@@ -182,7 +173,8 @@ libvirt: $(PREP)
 libipfix: $(PREP)
 	@echo "About to make libipfix"
 	#Fetch the source
-	wget http://ie.archive.ubuntu.com/disk1/disk1/download.sourceforge.net/pub/sourceforge/l/li/libipfix/libipfix/libipfix_110209.tgz --directory-prefix=./specs/libipfix/
+	wget -O ./specs/libipfix/libipfix_110209.tgz https://sourceforge.net/projects/libipfix/files/libipfix/libipfix_110209.tgz/download
+
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/libipfix/ --spec specs/libipfix/libipfix.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/libipfix*.src.rpm --resultdir $(BUILD_BASE)/BUILD
