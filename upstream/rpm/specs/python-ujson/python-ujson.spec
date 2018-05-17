@@ -15,6 +15,8 @@ Prefix: %{_prefix}
 Vendor: Jonas Tarnstrom <jonas.tarnstrom@esn.me>
 Url: http://github.com/esnme/ultrajson
 
+BuildRequires: python-devel
+
 %description
 UltraJSON is an ultra fast JSON encoder and decoder written in pure C with
 bindings for Python 2.5+ and 3.
