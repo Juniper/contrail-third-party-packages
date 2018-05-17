@@ -8,7 +8,7 @@ Summary: Python library for NETCONF clients
 Name: python-%{srcname}
 Version: %{version}
 Release: %{release}.%{_relstr}%{?dist}
-Source0: %{srcname}-%{unmangled_version}.tar.gz
+Source0: https://github.com/leopoul/%{srcname}/archive/v%{version}.tar.gz
 License: Apache License 2.0
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{srcname}-%{version}-%{release}-buildroot
