@@ -11,7 +11,7 @@ License: 		GPL
 Name: 			%{name}
 Version: 		%{version}
 Release: 		%{upstr_release}.%{_relstr}%{?dist}
-Source: 		http://mirror.olnevhost.net/pub/apache/kafka/0.8.1.1/kafka_2.9.2-0.8.1.1.tgz
+Source: 		https://archive.apache.org/dist/kafka/0.8.1.1/kafka_2.9.2-0.8.1.1.tgz
 Prefix: 		/usr/share/kafka
 Group: 			Development/Tools
 
