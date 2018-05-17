@@ -1,7 +1,7 @@
 
-%define name		kafka 
+%define name		kafka
 %define version 	2.10
-%define upstr_release 0.9.0.0_SNAPSHOT 
+%define upstr_release 0.9.0.0
 %define _relstr 0contrail0
 %define _prefix /usr/share/kafka
 
@@ -11,23 +11,23 @@ License: 		GPL
 Name: 			%{name}
 Version: 		%{version}
 Release: 		%{upstr_release}.%{_relstr}%{?dist}
-Source: 		https://github.com/Juniper/contrail-third-party-cache/blob/master/kafka/kafka_2.10-0.9.0.0-SNAPSHOT.tgz		
-Prefix: 		/usr/share/kafka
+Source:    https://archive.apache.org/dist/%{name}/%{upstr_release}/%{name}_%{version}-%{upstr_release}.tgz
+Prefix: 		/usr/share/%{name}
 Group: 			Development/Tools
 
 %description
 The GNU wget program downloads files from the Internet using the command-line.
 
 %prep
-%setup -q -n %{name}_%{version}-0.9.0.0-SNAPSHOT
+%setup -q -n %{name}_%{version}-%{upstr_release}
 
 %install
 pushd %{_builddir}/kafka*/
 for file in $(find . -type d); do
-    install -d ${file} %{buildroot}/usr/share/kafka/${file}
+    install -d ${file} %{buildroot}/usr/share/%{name}/${file}
 done
 for file in $(find . -type f); do
-    install -D ${file} %{buildroot}/usr/share/kafka/${file}
+    install -D ${file} %{buildroot}/usr/share/%{name}/${file}
 done
 
 popd
