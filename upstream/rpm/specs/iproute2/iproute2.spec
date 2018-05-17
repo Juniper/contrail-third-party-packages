@@ -14,6 +14,7 @@ License: GPLv2+ and Public Domain
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: tex(latex) tex(dvips) linuxdoc-tools
 BuildRequires: flex psutils db4-devel bison
+BuildRequires: libdb-devel
 # introduction new iptables (xtables) which broke ipt
 BuildRequires: iptables >= 1.4.5
 BuildRequires: iptables-devel >= 1.4.5
