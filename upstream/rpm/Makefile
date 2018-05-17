@@ -5,9 +5,18 @@ ifeq ($(strip $(version)), 6)
 else
    MOCK_CONFIG_LOCATION = epel-7-x86_64-contrail
 endif
-GIT_ROOT     := $(PWD)/../..
+
+MKFILE_DIR  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+GIT_ROOT      := $(MKFILE_DIR:/tools/packages/=)
 BUILD_BASE          := $(GIT_ROOT)/..
+
+SPEC_DIR      := $(MKFILE_DIR)upstream/rpm
+SPEC_TARGETS    := $(basename $(wildcard $(SPEC_DIR)/*))
+
 PREP = prep
+
+list:
+	@echo $(sort $(SPEC_TARGETS))
 
 $(PREP):
 	if [ -d "/etc/mock" ] && [ $(strip $(version)) -eq 6 ]; then \
@@ -266,15 +275,15 @@ librdkafka-0.9.0: $(PREP)
 	rm -f specs/librdkafka-0.9.0/0.9.0.zip
 	rm -rf specs/librdkafka-0.9.0/librdkafka-0.9.0
 
-zookeeper-3.4.8: $(PREP)
+zookeeper: $(PREP)
 	@echo "Abt to make zookeeper"
 	#Fetch the source
-	(cd specs/zookeeper/; wget http://mirror.cogentco.com/pub/apache/zookeeper/stable/zookeeper-3.4.8.tar.gz)
+	(cd specs/zookeeper/; wget http://mirror.cogentco.com/pub/apache/zookeeper/stable/zookeeper.tar.gz)
 	#mock instructions
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/zookeeper/ --spec specs/zookeeper/zookeeper.spec --resultdir=$(BUILD_BASE)/BUILD
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/zookeeper*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/zookeeper/zookeeper-3.4.8.tar.gz
-	rm -rf specs/zookeeper/zookeeper-3.4.8
+	rm -f specs/zookeeper/zookeeper.tar.gz
+	rm -rf specs/zookeeper/zookeeper
 
 python-sseclient: $(PREP)
 	@echo "About to make python-sseclient"
@@ -342,7 +351,7 @@ all:$(PREP) \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
 	xmltodict libvirt docker-py kafka librdkafka \
-	python-cassandra librdkafka-0.9.0 zookeeper-3.4.8 python-sseclient \
+	python-cassandra librdkafka-0.9.0 zookeeper python-sseclient \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
         python-consistent_hash
