@@ -5,7 +5,9 @@ ifeq ($(strip $(version)), 6)
 else
    MOCK_CONFIG_LOCATION = epel-7-x86_64-contrail
 endif
-GIT_ROOT     := $(PWD)/../..
+
+MKFILE_DIR  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+GIT_ROOT      := $(MKFILE_DIR:/tools/packages/=)
 BUILD_BASE          := $(GIT_ROOT)/..
 PREP = prep
 
