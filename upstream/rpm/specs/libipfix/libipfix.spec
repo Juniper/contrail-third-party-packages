@@ -10,7 +10,7 @@ License: 		LGPLv3+
 Name: 			%{name}
 Version: 		%{version}
 Release: 		%{release}%{?dist}
-Source: 		%{name}_%{version}.tgz
+Source: 		https://sourceforge.net/projects/libipfix/files/%{name}/%{name}_%{version}.tgz/download
 #Prefix: 		/usr
 Group: 			Development/Tools
 

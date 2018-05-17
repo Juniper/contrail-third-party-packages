@@ -93,5 +93,5 @@ python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 rm -rf $RPM_BUILD_ROOT
 
 %files -f INSTALLED_FILES
-/usr/lib64/python2.6/site-packages/lxml*
+%{python2_sitearch}/lxml*
 %defattr(-,root,root)

@@ -8,6 +8,7 @@ License: MIT
 Group: Applications/System
 URL: https://github.com/pycassa/pycassa
 Source: https://pypi.python.org/packages/source/p/pycassa/pycassa-1.10.0.tar.gz
+Patch0: ez_setup.py.patch
 
 BuildArch: noarch
 
@@ -29,6 +30,7 @@ spec file for pycassa package
 %prep 
 
 %setup -n pycassa-1.10.0
+%patch0 -p0
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
