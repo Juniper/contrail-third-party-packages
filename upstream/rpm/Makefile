@@ -182,7 +182,7 @@ libvirt: $(PREP)
 libipfix: $(PREP)
 	@echo "About to make libipfix"
 	#Fetch the source
-	wget http://ie.archive.ubuntu.com/disk1/disk1/download.sourceforge.net/pub/sourceforge/l/li/libipfix/libipfix/libipfix_110209.tgz --directory-prefix=./specs/libipfix/
+	spectool -g -R specs/libipfix/libipfix.spec -C specs/libipfix/
 	#mock instructions
 	mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/libipfix/ --spec specs/libipfix/libipfix.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/libipfix*.src.rpm --resultdir $(BUILD_BASE)/BUILD
@@ -200,7 +200,7 @@ kafka: $(PREP)
 kafka_2.10: $(PREP)
 	@echo "About to make kafka"
 	#Fetch the source
-	(cd specs/kafka_2.10/;wget https://github.com/Juniper/contrail-third-party-cache/blob/master/kafka/kafka_2.10-0.9.0.0-SNAPSHOT.tgz?raw=true -O kafka_2.10-0.9.0.0-SNAPSHOT.tgz)
+	spectool -g -R specs/kafka_2.10/kafka.spec -C specs/kafka_2.10/
 	#mock instructions
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) --buildsrpm --sources specs/kafka_2.10/ --spec specs/kafka_2.10/kafka.spec --resultdir=$(BUILD_BASE)/BUILD
 	/usr/bin/mock -r $(MOCK_CONFIG_LOCATION) $(BUILD_BASE)/BUILD/kafka*.src.rpm --resultdir $(BUILD_BASE)/BUILD
