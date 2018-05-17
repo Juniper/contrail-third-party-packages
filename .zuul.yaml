@@ -1,0 +1,5 @@
+- project:
+    name: Juniper/contrail-third-party-packages
+    check:
+      jobs:
+        - build-third-party-packages-centos7
