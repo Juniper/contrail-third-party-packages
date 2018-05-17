@@ -110,11 +110,10 @@ limitations under the License.
 %setup -n %{src_name}-%{unmangled_version} -n %{src_name}-%{unmangled_version}
 
 %build
-env CASS_DRIVER_NO_CYTHON=1
-env CFLAGS="$RPM_OPT_FLAGS" python setup.py build --no-libev
+env CFLAGS="$RPM_OPT_FLAGS" python setup.py build --no-libev --no-cython
 
 %install
-python setup.py install --no-libev --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+python setup.py install --no-cython --no-libev --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 
 %clean
 rm -rf $RPM_BUILD_ROOT
