@@ -23,12 +23,14 @@ BuildRequires:python-setuptools
 An API client for docker written in Python
 
 %prep
-%setup -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+%setup -q -n %{name}-%{unmangled_version} -n %{name}-%{unmangled_version}
+%patch0 -p1
 
 %build
 python setup.py build
 
 %install
+rm -rf $RPM_BUILD_ROOT
 python setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 
 %clean
