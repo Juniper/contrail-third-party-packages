@@ -142,6 +142,33 @@ python-thrift: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-thrift*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-thrift/thrift*.tar.gz
 
+python2-pip: $(PREP)
+	@echo "About to make python2-pip"
+	#Fetch the source
+	spectool -g -R specs/python2-pip/python2-pip.spec -C specs/python2-pip/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python2-pip/ --spec specs/python2-pip/python2-pip.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-pip*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python2-pip/pip*.tar.gz
+
+python2-scons: $(PREP)
+	@echo "About to make python2-scons"
+	#Fetch the source
+	spectool -g -R specs/python2-scons/python2-scons.spec -C specs/python2-scons/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python2-scons/ --spec specs/python2-scons/python2-scons.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python2-scons*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python2-scons/scons*.tar.gz
+
+python-fixtures: $(PREP)
+	@echo "About to make python-fixtures"
+	#Fetch the source
+	spectool -g -R specs/python-fixtures/python-fixtures.spec -C specs/python-fixtures/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-fixtures/ --spec specs/python-fixtures/python-fixtures.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-fixtures*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-fixtures/fixtures*.tar.gz
+
 redis-py: $(PREP)
 	@echo "About to make redis-py"
 	#Fetch the source
@@ -314,4 +341,4 @@ all:$(PREP) \
 	python-cassandra librdkafka-0.9.0 zookeeper python-sseclient \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
         kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-        python-consistent_hash
+        python-consistent_hash python2-pip python-fixtures
