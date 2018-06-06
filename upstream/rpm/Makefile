@@ -133,6 +133,24 @@ python-bitstring: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-bitstring*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-bitstring/bitstring*.zip
 
+python-fixtures: $(PREP)
+	@echo "About to make python-fixtures"
+	#Fetch the source
+	spectool -g -R specs/python-fixtures/python-fixtures.spec -C specs/python-fixtures/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-fixtures/ --spec specs/python-fixtures/python-fixtures.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-fixtures*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-fixtures/fixtures*.tar.gz
+
+python-testtools: $(PREP)
+	@echo "About to make python-testtools"
+	#Fetch the source
+	spectool -g -R specs/python-testtools/python-testtools.spec -C specs/python-testtools/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-testtools/ --spec specs/python-testtools/python-testtools.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-testtools*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-testtools/testtools*.tar.gz
+
 python-thrift: $(PREP)
 	@echo "About to make python-thrift"
 	#Fetch the source
@@ -141,6 +159,24 @@ python-thrift: $(PREP)
 	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-thrift/ --spec specs/python-thrift/python-thrift.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-thrift*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-thrift/thrift*.tar.gz
+
+python2-pip: $(PREP)
+	@echo "About to make python2-pip"
+	#Fetch the source
+	spectool -g -R specs/python2-pip/python2-pip.spec -C specs/python2-pip/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python2-pip/ --spec specs/python2-pip/python2-pip.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-pip*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python2-pip/pip*.tar.gz
+
+python2-scons: $(PREP)
+	@echo "About to make python2-scons"
+	#Fetch the source
+	spectool -g -R specs/python2-scons/python2-scons.spec -C specs/python2-scons/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python2-scons/ --spec specs/python2-scons/python2-scons.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/scons*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python2-scons/scons*.tar.gz
 
 redis-py: $(PREP)
 	@echo "About to make redis-py"
@@ -313,5 +349,5 @@ all:$(PREP) \
 	xmltodict docker-py kafka librdkafka \
 	python-cassandra librdkafka-0.9.0 zookeeper python-sseclient \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
-        kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-        python-consistent_hash
+	kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
+	python-consistent_hash python2-pip python-fixtures python2-scons
