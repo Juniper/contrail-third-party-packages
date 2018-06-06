@@ -79,15 +79,6 @@ python-ujson: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-ujson*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-ujson/ujson*.tar.gz
 
-python-lxml: $(PREP)
-	@echo "About to make python-lxml"
-	#Fetch the source
-	spectool -g -R specs/python-lxml/python-lxml.spec -C specs/python-lxml/
-	#mock instructions
-	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-lxml/ --spec specs/python-lxml/python-lxml.spec --resultdir=$(BUILD_BASE)/BUILD
-	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-lxml*.src.rpm --resultdir $(BUILD_BASE)/BUILD
-	rm -f specs/python-lxml/lxml*.tar.gz
-
 python-bottle: $(PREP)
 	@echo "About to make python-bottle"
 	#Fetch the source
@@ -133,6 +124,33 @@ python-bitstring: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-bitstring*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-bitstring/bitstring*.zip
 
+python-extras: $(PREP)
+	@echo "About to make python-extras"
+	#Fetch the source
+	spectool -g -R specs/python-extras/python-extras.spec -C specs/python-extras/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-extras/ --spec specs/python-extras/python-extras.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-extras*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-extras/extras*.tar.gz
+
+python-mimeparse: $(PREP)
+	@echo "About to make python-mimeparse"
+	#Fetch the source
+	spectool -g -R specs/python-mimeparse/python-mimeparse.spec -C specs/python-mimeparse/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-mimeparse/ --spec specs/python-mimeparse/python-mimeparse.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-mimeparse*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-mimeparse/python-mimeparse*.tar.gz
+
+python-testtools: $(PREP)
+	@echo "About to make python-testtools"
+	#Fetch the source
+	spectool -g -R specs/python-testtools/python-testtools.spec -C specs/python-testtools/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-testtools/ --spec specs/python-testtools/python-testtools.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-testtools*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python-testtools/testtools*.tar.gz
+
 python-thrift: $(PREP)
 	@echo "About to make python-thrift"
 	#Fetch the source
@@ -141,6 +159,24 @@ python-thrift: $(PREP)
 	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python-thrift/ --spec specs/python-thrift/python-thrift.spec --resultdir=$(BUILD_BASE)/BUILD
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-thrift*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-thrift/thrift*.tar.gz
+
+python2-pip: $(PREP)
+	@echo "About to make python2-pip"
+	#Fetch the source
+	spectool -g -R specs/python2-pip/python2-pip.spec -C specs/python2-pip/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python2-pip/ --spec specs/python2-pip/python2-pip.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-pip*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python2-pip/pip*.tar.gz
+
+python2-scons: $(PREP)
+	@echo "About to make python2-scons"
+	#Fetch the source
+	spectool -g -R specs/python2-scons/python2-scons.spec -C specs/python2-scons/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/python2-scons/ --spec specs/python2-scons/python2-scons.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/scons*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/python2-scons/scons*.tar.gz
 
 redis-py: $(PREP)
 	@echo "About to make redis-py"
@@ -307,11 +343,12 @@ python-jsonpickle: $(PREP)
 
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
-	python-simplejson python-ujson python-lxml python-bottle \
+	python-simplejson python-ujson python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
 	xmltodict docker-py kafka librdkafka \
 	python-cassandra librdkafka-0.9.0 zookeeper python-sseclient \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
-        kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-        python-consistent_hash
+	kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
+	python-consistent_hash python-extras python-mimeparse \
+	python2-scons python-testtools python2-pip
