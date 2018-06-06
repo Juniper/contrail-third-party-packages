@@ -1,0 +1,29 @@
+From 1dc2aa897ddda51503572f3f70a4818cf9a3884d Mon Sep 17 00:00:00 2001
+From: Tomas Orsava <torsava@redhat.com>
+Date: Fri, 17 Mar 2017 13:14:56 +0100
+Subject: [PATCH] Fix `pip install` in FIPS mode
+
+Resolves: rhbz#1430774
+---
+ pip/utils/hashes.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/pip/utils/hashes.py b/pip/utils/hashes.py
+index 9602970..c6d7524 100644
+--- a/pip/utils/hashes.py
++++ b/pip/utils/hashes.py
+@@ -39,7 +39,10 @@ class Hashes(object):
+         gots = {}
+         for hash_name in iterkeys(self._allowed):
+             try:
+-                gots[hash_name] = hashlib.new(hash_name)
++                if hash_name == 'md5':
++                    gots[hash_name] = hashlib.new(hash_name, usedforsecurity=False)
++                else:
++                    gots[hash_name] = hashlib.new(hash_name)
+             except (ValueError, TypeError):
+                 raise InstallationError('Unknown hash name: %s' % hash_name)
+
+--
+2.11.0
+
