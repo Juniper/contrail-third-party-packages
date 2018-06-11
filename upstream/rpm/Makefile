@@ -43,6 +43,15 @@ iproute2: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/iproute*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/iproute2/iproute2-*.tar.gz
 
+libuv: $(PREP)
+	@echo "About to make libuv package"
+	#Fetch the source
+	spectool -g -R specs/libuv/libuv.spec -C specs/libuv/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/libuv/ --spec specs/libuv/libuv.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/iproute*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/libuv/libuv-*.tar.gz
+
 python-pycassa: $(PREP)
 	@echo "About to make python-pycassa"
 	#Fetch the source
@@ -350,6 +359,15 @@ python-jsonpickle: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-jsonpickle*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-jsonpickle/jsonpickle-*.tar.gz
 
+nodejs: $(PREP)
+	@echo "About to make nodejs"
+	#Fetch the source
+	spectool -g -R specs/nodejs/nodejs.spec -C specs/nodejs/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/nodejs/ --spec specs/nodejs/nodejs.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/nodejs*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/nodejs/node-*.tar.gz
+
 userspace-rcu: $(PREP)
 	@echo "About to make userspace-rcu"
 	#Fetch the source
@@ -360,7 +378,7 @@ userspace-rcu: $(PREP)
 	rm -f specs/userspace-rcu/userspace-*.tar.bz2
 
 all:$(PREP) \
-	ifmap-server python-pycassa python-zope-interface \
+	ifmap-server libuv python-pycassa python-zope-interface \
 	python-simplejson python-ujson python-bottle \
 	python-geventhttpclient python-boto \
 	python-bitarray python-thrift redis-py \
@@ -369,4 +387,4 @@ all:$(PREP) \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
 	kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
 	python-consistent_hash python-extras python-fixtures python-mimeparse \
-	python2-scons python-testtools python2-pip userspace-rcu
+	python2-scons python-testtools python2-pip userspace-rcu nodejs-devel
