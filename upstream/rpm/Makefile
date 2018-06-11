@@ -305,6 +305,15 @@ python-jsonpickle: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-jsonpickle*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-jsonpickle/jsonpickle-*.tar.gz
 
+userspace-rcu: $(PREP)
+	@echo "About to make userspace-rcu"
+	#Fetch the source
+	spectool -g -R specs/userspace-rcu/userspace-rcu.spec -C specs/userspace-rcu/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/userspace-rcu/ --spec specs/userspace-rcu/userspace-rcu.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/userspace-rcu*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/userspace-rcu/userspace-*.tar.bz2
+
 all:$(PREP) \
 	ifmap-server python-pycassa python-zope-interface \
 	python-simplejson python-ujson python-lxml python-bottle \
@@ -313,5 +322,5 @@ all:$(PREP) \
 	xmltodict docker-py kafka librdkafka \
 	python-cassandra librdkafka-0.9.0 zookeeper python-sseclient \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
-        kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
-        python-consistent_hash
+	kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
+	python-consistent_hash userspace-rcu
