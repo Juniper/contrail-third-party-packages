@@ -350,6 +350,15 @@ python-jsonpickle: $(PREP)
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/python-jsonpickle*.src.rpm --resultdir $(BUILD_BASE)/BUILD
 	rm -f specs/python-jsonpickle/jsonpickle-*.tar.gz
 
+nodejs-devel: $(PREP)
+	@echo "About to make nodejs-devel"
+	#Fetch the source
+	spectool -g -R specs/nodejs-devel/nodejs-devel.spec -C specs/nodejs-devel/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/nodejs-devel/ --spec specs/nodejs-devel/nodejs-devel.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/nodejs-devel*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/nodejs-devel/nodejs-*.tar.bz2
+
 userspace-rcu: $(PREP)
 	@echo "About to make userspace-rcu"
 	#Fetch the source
@@ -369,4 +378,4 @@ all:$(PREP) \
 	python-bitstring cassandra-3.10 python-pyang python-pyangbind \
 	kafka-python python-kazoo-1.3.1 python-ncclient-0.3.2 \
 	python-consistent_hash python-extras python-fixtures python-mimeparse \
-	python2-scons python-testtools python2-pip userspace-rcu
+	python2-scons python-testtools python2-pip userspace-rcu nodejs-devel
