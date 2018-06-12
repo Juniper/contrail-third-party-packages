@@ -48,4 +48,3 @@ $(SPEC_TARGETS): prep
 	
 	@echo "contrail-third-party-packages: About to clean up src.rpm"
 	rm $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm
-
