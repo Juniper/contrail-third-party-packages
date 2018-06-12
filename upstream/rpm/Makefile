@@ -25,6 +25,15 @@ $(PREP):
 	fi; \
 	mkdir -p $(BUILD_BASE)/BUILD
 
+cassandra-cpp-driver: $(PREP)
+	@echo "About to make cassandra-cpp-driver"
+	#Fetch the source
+	spectool -g -R specs/cassandra-cpp-driver/cassandra-cpp-driver.spec -C specs/cassandra-cpp-driver/
+	#mock instructions
+	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/cassandra-cpp-driver/ --spec specs/cassandra-cpp-driver/cassandra-cpp-driver.spec --resultdir=$(BUILD_BASE)/BUILD
+	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/BUILD/cassandra-cpp-driver*.src.rpm --resultdir $(BUILD_BASE)/BUILD
+	rm -f specs/cassandra-cpp-driver/cassandra-*.tar.gz
+
 ifmap-server: $(PREP)
 	@echo "About to make ifmap-server"
 	#Fetch the source
