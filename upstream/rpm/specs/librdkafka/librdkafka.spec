@@ -1,4 +1,4 @@
-%define version 0.9.0 
+%define version 0.9.0
 %define release 0contrail0
 Name:    librdkafka
 Version: %{version}
