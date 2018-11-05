@@ -5,6 +5,7 @@ Version: %{version}
 Release: %{release}%{?dist}
 %define soname 1
 
+
 Summary: The Apache Kafka C library
 Group:   Development/Libraries/C and C++
 License: BSD-2-Clause
