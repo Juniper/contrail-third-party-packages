@@ -105,7 +105,6 @@ BuildRequires: gcc
 
 %description -n libzookeeper
 The client supports two types of APIs -- synchronous and asynchronous.
- 
 Asynchronous API provides non-blocking operations with completion callbacks and
 relies on the application to implement event multiplexing on its behalf.
  
