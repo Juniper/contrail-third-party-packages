@@ -42,7 +42,7 @@ $(SPEC_TARGETS): prep
 	@echo "contrail-third-party-packages: About to make $@ src.rpm"
 	spectool -g -R $(SPEC_DIR)/$@/$@.spec -C $(SPEC_DIR)/$@/
 	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/$@/ --spec specs/$@/$@.spec --resultdir=$(BUILD_BASE)/SRPMS
-	
+
 	@echo "contrail-third-party-packages: About to make $@ rpm"
 	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm --resultdir $(BUILD_BASE)/RPMS
 	
