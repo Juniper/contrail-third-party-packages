@@ -1,14 +1,14 @@
 %define name thrift
-%define version 0.9.1
-%define unmangled_version 0.9.1
-%define unmangled_version 0.9.1
+%define version 0.12.0
+%define unmangled_version 0.12.0
+%define unmangled_version 0.12.0
 %define release 1
 %define _relstr 0contrail
 Summary: Python bindings for the Apache Thrift RPC system
 Name: python-%{name}
 Version: %{version}
 Release: %{release}.%{_relstr}
-Source0: https://pypi.python.org/packages/source/t/thrift/thrift-0.9.1.tar.gz 
+Source0: http://ftp.man.poznan.pl/apache/thrift/0.12.0/thrift-0.12.0.tar.gz
 License: Apache License 2.0
 Group: Development/Libraries
 Prefix: %{_prefix}
@@ -19,7 +19,7 @@ Url: http://thrift.apache.org
 UNKNOWN
 
 %prep
-%setup -n thrift-0.9.1 
+%setup -n thrift-0.12.0
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
