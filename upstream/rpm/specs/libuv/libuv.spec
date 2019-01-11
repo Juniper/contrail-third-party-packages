@@ -7,7 +7,7 @@ Summary:        Platform layer for node.js
 # the licensing breakdown is described in detail in the LICENSE file
 License:        MIT and BSD and ISC
 URL:            https://libuv.org/
-Source0:        https://dist.libuv.org/dist/v%{version}/libuv-v%{version}.tar.gz
+Source0:        https://ftp.osuosl.org/pub/blfs/conglomeration/libuv/libuv-v%{version}.tar.gz
 Source2:        %{name}.pc.in
 
 BuildRequires:  autoconf automake libtool
