@@ -1,7 +1,7 @@
 %define name thrift
-%define version 0.9.1
-%define unmangled_version 0.9.1
-%define unmangled_version 0.9.1
+%define version 0.9.1-15
+%define unmangled_version 0.9.1-15
+%define unmangled_version 0.9.1-15
 %define release 1
 %define _relstr 0contrail
 Summary: Python bindings for the Apache Thrift RPC system
@@ -19,7 +19,7 @@ Url: http://thrift.apache.org
 UNKNOWN
 
 %prep
-%setup -n thrift-0.9.1 
+%setup -n thrift-0.9.1-15
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
