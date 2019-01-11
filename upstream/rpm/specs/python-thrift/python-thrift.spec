@@ -19,7 +19,7 @@ Url: http://thrift.apache.org
 UNKNOWN
 
 %prep
-%setup -n thrift-0.9.1 
+%setup -n thrift-0.9.1-15
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
