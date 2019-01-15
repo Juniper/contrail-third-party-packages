@@ -1,0 +1,20 @@
+---
+#This playbook will override default urls from rpm building and uploading roles.
+#That will let us to use rpms with changes per build.
+- hosts: builder
+  roles:
+    - role: install-third-party-toolchain
+    - role: build-third-party-rpms
+
+- hosts: builder
+  roles:
+    - role: fetch-packages
+
+- hosts: localhost
+  roles:
+    - role: publish-rpm-nexus
+      pkg_src_dir: '{{ zuul.executor.work_root }}/packages/'
+      remote_repo_path: 'yum-tpc-test'
+      nexus_credentials:
+        user: 'test'
+        password: 'test123'
