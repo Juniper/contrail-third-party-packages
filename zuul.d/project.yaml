@@ -1,0 +1,10 @@
+---
+
+- project:
+    name: Juniper/contrail-third-party-packages
+    experimental:
+      jobs:
+        - noop
+        - ctpp-per-review:
+            files:
+              - upstream/rpm/.*
