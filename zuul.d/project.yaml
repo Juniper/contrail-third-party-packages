@@ -1,0 +1,16 @@
+---
+
+- project:
+    name: Juniper/contrail-third-party-packages
+    check:
+      jobs:
+        - noop
+    experimental:
+      jobs:
+        - noop
+        - ctpp-per-review:
+            files:
+              - upstream/rpm/.*
+    gate:
+      jobs:
+        - noop

@@ -1,0 +1,16 @@
+---
+#This playbook will override default urls from rpm building and uploading roles.
+#That will let us to use rpms with changes per build.
+- hosts: builder
+  roles:
+    - role: install-third-party-toolchain
+    - role: build-third-party-rpms
+
+- hosts: builder
+  roles:
+    - role: fetch-packages
+
+- hosts: localhost
+  roles:
+    - role: contrail-common-libs2
+    - role: publish-rpm-nexus
