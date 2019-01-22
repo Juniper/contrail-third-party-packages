@@ -12,5 +12,5 @@
 
 - hosts: localhost
   roles:
-    - role: contrail-common-libs2
+    # - role: contrail-common-libs2
     - role: publish-rpm-nexus
