@@ -7,8 +7,7 @@
         - noop
     experimental:
       jobs:
-        - noop
-        - ctpp-per-review:
+        - publish-third-party-packages:
             files:
               - upstream/rpm/.*
     gate:
