@@ -7,6 +7,7 @@
       per review use.
     parent: build-third-party-rpms-base
     run: playbooks/contrail-third-party-packages-per-review/run.yaml
+    post-run: playbooks/contrail-third-party-packages-per-review/post.yaml
     required-projects:
       - Juniper/contrail-zuul-jobs
     files:
@@ -14,4 +15,5 @@
       - ^tests/.*
       - ^roles/publish-rpm-nexus/.*
       - ^roles/build-third-party-rpms/.*
+      - ^roles/yum-repos-prepare/.*
     nodeset: builder-centos-7
