@@ -10,7 +10,7 @@
   roles:
     - role: fetch-packages
 
-- hosts: localhost
+- hosts: builder
   roles:
-    - role: contrail-common-libs2
+    # - role: contrail-common-libs2
     - role: publish-rpm-nexus
