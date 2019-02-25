@@ -15,7 +15,7 @@ Group: Development/Libraries
 Prefix: %{_prefix}
 Vendor: Antonin Amand <antonin.amand@gmail.com>
 
-BuildRequires: python-setuptools 
+BuildRequires: python-setuptools
 BuildRequires: gcc
 BuildRequires: python-devel
 
