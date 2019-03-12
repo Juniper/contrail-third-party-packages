@@ -4,7 +4,7 @@
 %define src_name kafka
 %define version 0.9.0.1
 %define scala_version 2.11
-%define build_number 1
+%define build_number 2
 %define tarball_name %{src_name}_%{scala_version}-%{version}
 %define tarball %{tarball_name}.tgz
 %define release 0contrail0
@@ -39,7 +39,6 @@ mkdir $RPM_BUILD_ROOT%{_prefix}/kafka/bin
 cp bin/kafka-*.sh $RPM_BUILD_ROOT%{_prefix}/kafka/bin/
 cp -r libs $RPM_BUILD_ROOT%{_prefix}/kafka/
 cp -r config $RPM_BUILD_ROOT%{_prefix}/kafka/
-mkdir -p $RPM_BUILD_ROOT/etc/rc.d/init.d
 mkdir -p $RPM_BUILD_ROOT/var/log/kafka
 
 %clean
@@ -52,24 +51,24 @@ if ! /usr/bin/getent passwd kafka >/dev/null ; then
 fi
 
 %post
-if [ $1 = 1 ]; then
-    /sbin/chkconfig --add kafka
-fi
+#if [ $1 = 1 ]; then
+#fi
 
 %preun
 # When the last version of a package is erased, $1 is 0
-if [ $1 = 0 ]; then
-    /sbin/service kafka stop >/dev/null
-    /sbin/chkconfig --del kafka
-fi
+#if [ $1 = 0 ]; then
+#fi
 
 %postun
 # When the last version of a package is erased, $1 is 0
 # Otherwise it's an upgrade and we need to restart the service
-if [ $1 -ge 1 ]; then
-    /sbin/service kafka stop >/dev/null 2>&1
-    sleep 1
-    /sbin/service kafka start >/dev/null 2>&1
+#if [ $1 -ge 1 ]; then
+#fi
+
+# When the last version of a package is erased, $1 is 0
+if [ $1 = 0 ]; then
+    /bin/rm -rf %{_prefix}/kafka
+    /usr/sbin/userdel kafka
 fi
 
 %files
@@ -84,6 +83,11 @@ fi
 %doc LICENSE
 
 %changelog
+* Tue Mar 12 2019 Michal Czuba (michal.czuba@codilime.com) - 2
+- removed service/init leftovers
+- turned off creating kafka user homedir (%{_prefix}/kafka) when adding the user; done in install section
+- specified gid when creating kafka group (following the Dockerfile)
+- added some basic uninstall
 * Mon Mar 11 2019 Michal Czuba (michal.czuba@codilime.com) - 1
 - Initial release: 1 version
 - removed custom init script and packager info
