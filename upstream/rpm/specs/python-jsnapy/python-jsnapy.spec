@@ -14,7 +14,6 @@ BuildRequires:  python-setuptools
 BuildRequires:  unzip
 
 Requires:       python-six
-Requires:       python-configparser
 
 %description
 Junos Snapshot Administrator (jsnapy) enables you to capture and audit runtime environment snapshots of your networked devices running the Junos operating system (Junos OS).
