@@ -7,8 +7,6 @@
       per review use.
     parent: build-third-party-rpms-base
     run: playbooks/contrail-third-party-packages-per-review/run.yaml
-    required-projects:
-      - Juniper/contrail-zuul-jobs
     files:
       - ^upstream/rpm/.*
       - ^tests/.*
