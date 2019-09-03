@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8e66b5_14bace10",
+        "filename": "upstream/rpm/specs/python2-future/python2-future.spec",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 760
+      },
+      "writtenOn": "2019-09-03T09:10:17Z",
+      "side": 1,
+      "message": "It looks like an EPEL package. What are the modifications? Does this spec fit the circumstances described in https://github.com/Juniper/contrail-third-party-packages/wiki/Third-party-packages-in-centos",
+      "revId": "cfeaf10eec5a79b5e3efacd750c6a5eddffe317e",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
