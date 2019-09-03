@@ -16,6 +16,24 @@
       "revId": "cfeaf10eec5a79b5e3efacd750c6a5eddffe317e",
       "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6c0329_16e41986",
+        "filename": "upstream/rpm/specs/python2-future/python2-future.spec",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 772
+      },
+      "writtenOn": "2019-09-03T09:25:24Z",
+      "side": 1,
+      "message": "Yes. This package is also in EPEL.\nModifications are:\n - removed Fedora patch to fix building while having connectivity issues\n - removed all python3 if-blocks and leaving only python2 build\n\nThe package could be installed also from EPEL (the changes are perfectly omitable), but it will be necessary to add an EPEL repo every time this package is needed in a container. For me this would be fine also.",
+      "parentUuid": "4d8e66b5_14bace10",
+      "revId": "cfeaf10eec5a79b5e3efacd750c6a5eddffe317e",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": false
     }
   ]
 }
