@@ -1,4 +1,10 @@
-nodejs (0.10.35-1contrail1) trusty; urgency=medium
+nodejs (0.10.44-1contrail1) trusty; urgency=medium
+
+  * New upstream release.
+
+ -- Zheyang Song <jerome_soung@hotmail.com>  Fri Sep 20 2019 11:52:49 -0700
+ 
+ nodejs (0.10.35-1contrail1) trusty; urgency=medium
 
   * New upstream release.
 
