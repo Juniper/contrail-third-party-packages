@@ -1,12 +1,12 @@
 %define srcname configparser
 
 Name:     python-%srcname
-Version:  3.8.1
+Version:  3.5.3
 Release:  0
 Summary:  ConfigParser module
 License:  MIT
 URL:      https://bitbucket.org/ambv/configparser
-Source0:  https://files.pythonhosted.org/packages/b1/83/fa54eee6643ffb30ab5a5bebdb523c697363658e46b85729e3d587a3765e/configparser-3.8.1.tar.gz
+Source0:  https://files.pythonhosted.org/packages/37/ab/4e606ca94d04050cfe393d7496da2a758f27e98e64fa46b49c5ab04e9f20/configparser-3.5.3.tar.gz
 BuildArch: noarch
 
 BuildRequires:  python2-devel python2-setuptools
@@ -48,4 +48,4 @@ rm -rf %{buildroot}%{python2_sitelib}/*.egg-info
 
 %files
 %doc README.rst
-%{python2_sitelib}/backports/configparser
+%{python2_sitelib}/*
