@@ -16,7 +16,7 @@ Vendor: ['Thrift Developers'] <['dev@thrift.apache.org']>
 Url: http://thrift.apache.org
 
 %description
-UNKNOWN
+python-thrift-0.9.1
 
 %prep
 %setup -n thrift-0.9.1 
