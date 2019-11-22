@@ -8,7 +8,7 @@ Summary: Python bindings for the Apache Thrift RPC system
 Name: python-%{name}
 Version: %{version}
 Release: %{release}.%{_relstr}
-Source0: https://pypi.python.org/packages/source/t/thrift/thrift-0.9.1.tar.gz 
+Source0: https://pypi.python.org/packages/source/t/thrift/thrift-0.9.1.tar.gz
 License: Apache License 2.0
 Group: Development/Libraries
 Prefix: %{_prefix}
