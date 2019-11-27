@@ -83,7 +83,6 @@ that expose basic message attributes: topic, partition, offset, key, and value:
 ...     msg = next(consumer)
 ...     assert isinstance(msg.value, dict)
 
-
 KafkaProducer
 *************
 
