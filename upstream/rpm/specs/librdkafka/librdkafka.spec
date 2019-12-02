@@ -40,7 +40,7 @@ using librdkafka.
 
 %prep
 #%setup -qc
-%setup -n %{name}-%{version} 
+%setup -n %{name}-%{version}
 
 %configure
 
