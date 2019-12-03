@@ -9,7 +9,7 @@ Summary: http client library for gevent
 Name: python-%{name}
 Version: %{version}
 Release: %{release}.%{_relstr}
-Source0: https://pypi.python.org/packages/source/g/geventhttpclient/geventhttpclient-1.0a.tar.gz 
+Source0: https://pypi.python.org/packages/source/g/geventhttpclient/geventhttpclient-1.0a.tar.gz
 License: UNKNOWN
 Group: Development/Libraries
 Prefix: %{_prefix}
