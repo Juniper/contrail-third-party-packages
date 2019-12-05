@@ -7,7 +7,7 @@ Summary: Makes working with XML feel like you are working with JSON
 Name: %{name}
 Version: %{version}
 Release: %{release}.%{_relstr}
-Source0: https://pypi.python.org/packages/source/x/xmltodict/xmltodict-0.7.0.tar.gz 
+Source0: https://pypi.python.org/packages/source/x/xmltodict/xmltodict-0.7.0.tar.gz
 License: MIT
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
