@@ -16,6 +16,10 @@ UTILS_DIR    := $(RPM_DIR)/utils
 
 PKG_NAME = $(shell rpmspec --query --queryformat='%{name}-%{version}-%{release}\n' $(SPEC_DIR)/$@/$@.spec | head -n1)
 
+clean_clock:
+	find . -type f | xargs touch
+	rm -rf $(OBJS)
+
 all: $(SPEC_TARGETS)
 
 list:
