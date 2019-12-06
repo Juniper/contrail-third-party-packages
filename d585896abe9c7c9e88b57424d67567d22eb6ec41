@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e55fd784_eab15bce",
+        "filename": "upstream/rpm/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 760
+      },
+      "writtenOn": "2019-12-06T10:19:53Z",
+      "side": 1,
+      "message": "Please name it `touch_all` as you are not doing anything with clock here really.",
+      "revId": "d585896abe9c7c9e88b57424d67567d22eb6ec41",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d12d36a7_13bdcb0c",
+        "filename": "upstream/rpm/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 760
+      },
+      "writtenOn": "2019-12-06T10:19:53Z",
+      "side": 1,
+      "message": "Ordering: How about removing first, and then performing find? Wouldn\u0027t it be faster?",
+      "revId": "d585896abe9c7c9e88b57424d67567d22eb6ec41",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
