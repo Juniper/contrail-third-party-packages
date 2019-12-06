@@ -38,6 +38,9 @@ clean_rpms:
 clean: clean_srpms clean_rpms
 	::
 
+touch_all:
+	find . -exec touch {} +
+
 $(SPEC_TARGETS): prep
 	@echo "contrail-third-party-packages: About to make $@ src.rpm"
 	spectool -g -R $(SPEC_DIR)/$@/$@.spec -C $(SPEC_DIR)/$@/
