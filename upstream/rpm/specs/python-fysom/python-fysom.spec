@@ -13,7 +13,7 @@ BuildRequires:  python-devel
 BuildRequires:  python-setuptools
 
 %description
-pYthOn Finite State Machine
+Python Finite State Machine
 
 %prep
 %setup -q -n %{srcname}-%{version}
