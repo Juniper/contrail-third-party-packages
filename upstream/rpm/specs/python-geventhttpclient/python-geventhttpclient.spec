@@ -23,7 +23,7 @@ BuildRequires: python-devel
 UNKNOWN
 
 %prep
-%setup -q -n geventhttpclient-1.0a 
+%setup -q -n geventhttpclient-1.0a
 
 %build
 env CFLAGS="$RPM_OPT_FLAGS" python setup.py build
