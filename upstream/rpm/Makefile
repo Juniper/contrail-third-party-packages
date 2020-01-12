@@ -8,7 +8,7 @@ endif
 
 RPM_DIR   := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 GIT_ROOT     := $(RPM_DIR:/upstream/rpm/=)
-BUILD_BASE   := $(GIT_ROOT)/..
+BUILD_BASE   ?= $(GIT_ROOT)/..
 
 SPEC_DIR     := $(RPM_DIR)/specs
 SPEC_TARGETS := $(notdir $(wildcard $(SPEC_DIR)/*))
@@ -22,6 +22,7 @@ list:
 	@echo $(sort $(SPEC_TARGETS))
 
 prep:
+	@echo "Build base is $(BUILD_BASE)"
 	@if [ -d "/etc/mock" ] && [ ! -f "/etc/mock/$(MOCK_CONFIG).cfg" ]; then \
 		sudo cp $(UTILS_DIR)/$(MOCK_CONFIG).cfg /etc/mock/; \
 	fi; \
