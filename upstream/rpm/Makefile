@@ -43,13 +43,22 @@ touch_all:
 	find . -exec touch {} +
 
 $(SPEC_TARGETS): prep
-	@echo "contrail-third-party-packages: About to make $@ src.rpm"
+	@echo "contrail-third-party-packages: prepare sources for $@"
 	spectool -g -R $(SPEC_DIR)/$@/$@.spec -C $(SPEC_DIR)/$@/
-	mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/$@/ --spec specs/$@/$@.spec --resultdir=$(BUILD_BASE)/SRPMS
-
-	@echo "contrail-third-party-packages: About to make $@ rpm"
-	mock -r $(MOCK_CONFIG) $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm --resultdir $(BUILD_BASE)/RPMS
-
-	@echo "contrail-third-party-packages: About to clean up src.rpm"
-	rm $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm
-	rm $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm
+	@if ! cat /proc/self/cgroup | grep -q docker ; then \
+		echo "contrail-third-party-packages: About to make $@ src.rpm" ; \
+		mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/$@/ --spec specs/$@/$@.spec --resultdir=$(BUILD_BASE)/SRPMS ;\
+		echo "contrail-third-party-packages: About to make $@ rpm" ; \
+		mock -r $(MOCK_CONFIG) $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm --resultdir $(BUILD_BASE)/RPMS ;\
+		echo "contrail-third-party-packages: About to clean up src.rpm" ; \
+		rm $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm ; \
+		rm $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm ; \
+	else \
+		echo "docker env: contrail-third-party-packages: make $@" ; \
+		yum-builddep -q -y specs/$@/$@.spec ; \
+		rpmbuild -bb \
+			--define "_buildrootdir $$(mktemp -d)" \
+			--define "_topdir $(BUILD_BASE)" \
+			--define "_sourcedir $(SPEC_DIR)/$@" \
+			specs/$@/$@.spec ; \
+	fi
