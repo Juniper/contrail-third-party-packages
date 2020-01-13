@@ -50,7 +50,8 @@ rm -f %{buildroot}%{_libdir}/libuv.la
 #./run-tests
 #./run-benchmarks
 
-%ldconfig_scriptlets
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %doc README.md AUTHORS CONTRIBUTING.md MAINTAINERS.md SUPPORTED_PLATFORMS.md
