@@ -23,6 +23,7 @@ Group:         System Environment/Libraries
 
 URL:           http://datastax.github.io/cpp-driver/
 Source0:       https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}/%{gh_project}-%{version}-%{gh_short}.tar.gz
+#Source0:       https://github.com/alexey-mr/cassandra-tpp-test/raw/master/cpp-driver-2.7.0-d5152de.tar.gz
 
 BuildRequires: cmake >= 2.6.4
 BuildRequires: libuv-devel
