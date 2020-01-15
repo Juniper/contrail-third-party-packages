@@ -65,6 +65,8 @@ make %{_smp_mflags}
 %install
 make install DESTDIR="%{buildroot}"
 
+exit 1
+
 rm %{buildroot}%{_libdir}/%{libname}_static.a
 rm %{buildroot}%{_libdir}//pkgconfig/cassandra_static.pc
 
