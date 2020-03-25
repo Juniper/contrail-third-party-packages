@@ -1,3 +1,5 @@
+# test
+
 version=$(shell lsb_release -r | cut -f2 -d":" | cut -f1 -d".")
 print-%  : ; @echo $* = $($*)
 ifeq ($(strip $(version)), 6)
