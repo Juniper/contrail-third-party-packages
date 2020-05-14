@@ -1,5 +1,5 @@
 %define _noarch_libdir /usr/lib
-%define rel_ver 3.4.8
+%define rel_ver 3.6.1
 %define _relstr 0contrail0
 Summary: High-performance coordination service for distributed applications.
 Name: zookeeper
