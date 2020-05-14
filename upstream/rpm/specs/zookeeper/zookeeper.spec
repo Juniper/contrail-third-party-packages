@@ -1,5 +1,5 @@
 %define _noarch_libdir /usr/lib
-%define rel_ver 3.4.8
+%define rel_ver 3.6.1
 %define _relstr 0contrail0
 Summary: High-performance coordination service for distributed applications.
 Name: zookeeper
@@ -8,7 +8,7 @@ Release: %{_relstr}%{?dist}
 License: Apache License v2.0
 Group: Applications/Databases
 URL: http://hadoop.apache.org/zookeeper/
-Source0: https://archive.apache.org/dist/zookeeper/zookeeper-%{rel_ver}/zookeeper-%{rel_ver}.tar.gz
+Source0: https://archive.apache.org/dist/zookeeper/zookeeper-%{rel_ver}/apache-zookeeper-%{rel_ver}.tar.gz
 Source1: zookeeper.init
 Source2: zookeeper.logrotate
 Source3: zoo.cfg
