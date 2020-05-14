@@ -1,21 +1,21 @@
 %define _noarch_libdir /usr/lib
-%define rel_ver 3.4.8
+%define rel_ver 3.6.1
 %define _relstr 0contrail0
 Summary: High-performance coordination service for distributed applications.
-Name: zookeeper
+Name: apache-zookeeper
 Version: %{rel_ver}
 Release: %{_relstr}%{?dist}
 License: Apache License v2.0
 Group: Applications/Databases
 URL: http://hadoop.apache.org/zookeeper/
-Source0: https://archive.apache.org/dist/zookeeper/zookeeper-%{rel_ver}/zookeeper-%{rel_ver}.tar.gz
+Source0: https://archive.apache.org/dist/zookeeper/zookeeper-%{rel_ver}/apache-zookeeper-%{rel_ver}.tar.gz
 Source1: zookeeper.init
 Source2: zookeeper.logrotate
 Source3: zoo.cfg
 Source4: log4j.properties
 Source5: java.env
 BuildRoot: %{_tmppath}/%{name}-%{rel_ver}-%{release}-root
-BuildRequires: python-devel,gcc,make,libtool,autoconf,cppunit-devel
+BuildRequires: python-devel,gcc,make,libtool,autoconf,cppunit-devel,maven,hostname
 Requires: logrotate, java, nc
 Requires(post): chkconfig initscripts
 Requires(pre): chkconfig initscripts
@@ -39,30 +39,19 @@ implementing coordination services from scratch.
 %define _maindir %{buildroot}%{_zookeeper_noarch_libdir}
 
 %prep
-%setup -q -n zookeeper-%{rel_ver}
+%setup -q -n apache-zookeeper-%{rel_ver}
 
 %build
-pushd src/c
-rm -rf aclocal.m4 autom4te.cache/ config.guess config.status config.log \
-    config.sub configure depcomp install-sh ltmain.sh libtool \
-    Makefile Makefile.in missing stamp-h1 compile
-autoheader
-libtoolize --force
-aclocal
-automake -a
-autoconf
-autoreconf
-%configure
-%{__make} %{?_smp_mflags}
-popd
+mvn clean -Pfull-build
+mvn install -Pfull-build -DskipTests
 
 %install
 rm -rf %{buildroot}
 install -p -d %{buildroot}%{_zookeeper_noarch_libdir}
-cp -a bin lib %{buildroot}%{_zookeeper_noarch_libdir}
+cp -a bin zookeeper-server/target/lib %{buildroot}%{_zookeeper_noarch_libdir}
 
 mkdir -p %{buildroot}%{_sysconfdir}/zookeeper
-install -p -D -m 644 zookeeper-%{rel_ver}.jar %{buildroot}%{_zookeeper_noarch_libdir}/zookeeper-%{rel_ver}.jar
+install -p -D -m 644 zookeeper-server/target/zookeeper-%{rel_ver}.jar %{buildroot}%{_zookeeper_noarch_libdir}/zookeeper-%{rel_ver}.jar
 install -p -D -m 755 %{S:1} %{buildroot}%{_initrddir}/zookeeper
 install -p -D -m 644 %{S:2} %{buildroot}%{_sysconfdir}/logrotate.d/zookeeper
 install -p -D -m 644 %{S:3} %{buildroot}%{_sysconfdir}/zookeeper/zoo.cfg
@@ -76,15 +65,15 @@ install -d %{buildroot}%{_localstatedir}/lib/zookeeper
 install -d %{buildroot}%{_localstatedir}/lib/zookeeper/data
 install -p -d -D -m 0755 %{buildroot}%{_datadir}/zookeeper
 
-%{makeinstall} -C src/c
+%{makeinstall} -C zookeeper-client/zookeeper-client-c/target/c
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc CHANGES.txt LICENSE.txt NOTICE.txt README.txt
-%doc docs recipes
+%doc LICENSE.txt NOTICE.txt README.md
+%doc zookeeper-docs zookeeper-recipes
 %dir %attr(0750, zookeeper, zookeeper) %{_localstatedir}/lib/zookeeper
 %dir %attr(0750, zookeeper, zookeeper) %{_localstatedir}/lib/zookeeper/data
 %dir %attr(0750, zookeeper, zookeeper) %{_localstatedir}/log/zookeeper
@@ -117,7 +106,7 @@ Sync and Async APIs can be mixed and matched within the same application.
 
 %files -n libzookeeper
 %defattr(-, root, root, -)
-%doc src/c/README src/c/LICENSE
+%doc zookeeper-client/zookeeper-client-c/README zookeeper-client/zookeeper-client-c/LICENSE
 %{_libdir}/libzookeeper_mt.so.*
 %{_libdir}/libzookeeper_st.so.*
 

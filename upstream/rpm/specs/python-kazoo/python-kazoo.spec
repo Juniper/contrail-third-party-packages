@@ -1,7 +1,7 @@
 %define srcname kazoo
 
 Name:     python-%srcname
-Version:  2.5.0
+Version:  2.7.0
 Release:  0
 Summary:  Higher Level Zookeeper Client
 License:  Apache 2.0
