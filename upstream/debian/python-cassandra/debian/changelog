@@ -1,5 +1,0 @@
-cassandra-driver (3.0.0-0contrail3) trusty; urgency=low
-
-  * source package automatically created by stdeb 0.6.0+git
-
- -- Arvind Viswanathan (New pgp key) <arvindv@juniper.net>  Tue, 29 Dec 2015 19:09:19 +0000

@@ -1,3 +1,0 @@
-OTHERMIRROR="deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/ocata main | deb http://nova.clouds.archive.ubuntu.com/ubuntu/ xenial universe"
-
-HOOKDIR="/var/cache/pbuilder/hook.d/"
