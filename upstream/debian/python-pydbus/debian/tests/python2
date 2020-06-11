@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-for py in $(pyversions -i); do
-    debian/tests/run_tests.sh $py
-done

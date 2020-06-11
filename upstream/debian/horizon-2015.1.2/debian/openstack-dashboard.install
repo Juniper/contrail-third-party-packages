@@ -1,3 +1,0 @@
-debian/openstack-dashboard.conf etc/apache2/conf-available
-etc/openstack-dashboard
-usr/share/openstack-dashboard

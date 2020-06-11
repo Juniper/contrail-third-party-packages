@@ -1,6 +1,0 @@
-python-sseclient (0.0.11-0contrail0) trusty; urgency=low
-
-
-  * Debian package for python-sseclient
-
- -- Sundaresan Rajangam (PGP Key) <srajanga@juniper.net> Tue, 15 Mar 2016 18:17:25 +0000

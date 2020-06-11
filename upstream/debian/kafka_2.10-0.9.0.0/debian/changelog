@@ -1,5 +1,0 @@
-kafka (2.10-0.9.0.0-SNAPSHOT-0contrail0) trusty; urgency=low
-
-  * This is package version without any changes
-
- -- Arvind Viswanathan (New pgp key) <arvindv@juniper.net>  Fri, 05 Dec 2014 11:17:38 -0800

@@ -1,2 +1,0 @@
-# Templates are not intended to be executed directly:
-python-django-horizon binary: script-not-executable usr/share/pyshared/horizon/dashboards/settings/templates/settings/tenant/openrc.sh.template
