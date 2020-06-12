@@ -38,6 +38,8 @@ implementing coordination services from scratch.
 %define _zookeeper_noarch_libdir %{_noarch_libdir}/zookeeper
 %define _maindir %{buildroot}%{_zookeeper_noarch_libdir}
 
+#checking if this breaks
+
 %prep
 %setup -q -n zookeeper-%{rel_ver}
 
