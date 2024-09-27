@@ -1,0 +1,14 @@
+diff -Nur ansible-2.4.1.0.orig/requirements.txt ansible-2.4.1.0/requirements.txt
+--- ansible-2.4.1.0.orig/requirements.txt	2017-10-25 16:05:04.000000000 -0700
++++ ansible-2.4.1.0/requirements.txt	2017-10-30 14:41:31.202896847 -0700
+@@ -3,8 +3,8 @@
+ # packages.  Thus, this should be the loosest set possible (only required
+ # packages, not optional ones, and with the widest range of versions that could
+ # be suitable)
+-jinja2
++jinja2 >= 2.6
+ PyYAML
+ paramiko
+-cryptography
++pycrypto >= 2.6
+ setuptools
